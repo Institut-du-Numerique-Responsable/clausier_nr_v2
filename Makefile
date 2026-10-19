@@ -2,7 +2,7 @@
 # sont facultatifs (contrôle d'intégrité face au PDF, test de recalcul du classeur).
 PY ?= .venv/bin/python
 
-.PHONY: install validate integrity excel site build test serve deploy-essai deploy clean
+.PHONY: install validate integrity excel site build test serve visuels deploy-essai deploy clean
 
 install:            ## crée l'environnement Python et installe les dépendances
 	python3 -m venv .venv
@@ -27,6 +27,9 @@ test:               ## lance tous les tests
 
 serve: site         ## sert le site sur http://127.0.0.1:8000/
 	cd dist/site && python3 -m http.server 8000 --bind 127.0.0.1
+
+visuels: build      ## visuels de présentation dans dist/visuels/ (requirements-visuels.txt)
+	$(PY) scripts/build_visuels.py
 
 deploy-essai: build  ## montre ce que le déploiement OVH enverrait (aucune modification)
 	sh scripts/deploy_ovh.sh
