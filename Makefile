@@ -2,7 +2,7 @@
 # sont facultatifs (contrôle d'intégrité face au PDF, test de recalcul du classeur).
 PY ?= .venv/bin/python
 
-.PHONY: install validate integrity excel site build test serve visuels deploy-essai deploy clean
+.PHONY: install validate integrity excel site build test serve visuels deploy-essai deploy indexnow clean
 
 install:            ## crée l'environnement Python et installe les dépendances
 	python3 -m venv .venv
@@ -36,6 +36,9 @@ deploy-essai: build  ## montre ce que le déploiement OVH enverrait (aucune modi
 
 deploy: build test  ## publie dist/site sur ovh-cluster127 (après validation)
 	sh scripts/deploy_ovh.sh --appliquer
+
+indexnow:           ## signale les URL du site en ligne à Bing et aux moteurs IndexNow
+	$(PY) scripts/indexnow.py --envoyer
 
 clean:              ## supprime les livrables générés
 	rm -rf dist build

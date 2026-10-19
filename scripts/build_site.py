@@ -520,6 +520,9 @@ cochez « Retenir » sur celles qui servent votre consultation.</p>
                 f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n',
                 encoding="utf-8")
         (self.out / "robots.txt").write_text("\n".join(robots) + "\n", encoding="utf-8")
+        if self.meta.get("indexnow_cle"):
+            cle = self.meta["indexnow_cle"]
+            (self.out / f"{cle}.txt").write_text(cle, encoding="utf-8")
         b = base or ""
         idx = [f"# {self.meta['titre']} V{self.meta['version']}", "",
                f"> {DESC}", "",

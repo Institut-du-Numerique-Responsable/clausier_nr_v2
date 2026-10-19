@@ -48,12 +48,19 @@ n'a aucun script ni style inline (contrôlé par les tests). CSS et JS sont mis 
 7 jours ; leurs adresses portent une empreinte (`style.css?v=…`), donc chaque publication est
 prise en compte immédiatement.
 
+Après un déploiement qui ajoute ou modifie des pages, signalez-les aux moteurs IndexNow
+(Bing, qui alimente aussi la recherche de ChatGPT et Copilot) :
+
+```sh
+make indexnow       # envoie les URL du sitemap ; la clé est dans data/metadata.yml
+```
+
 ## Publier une version
 
 1. Mettre à jour `CHANGELOG.md` et `data/metadata.yml` (version).
 2. Fusionner sur `main`, puis créer un tag : `git tag v2.0.1 && git push origin v2.0.1`.
 3. Le workflow `publication.yml` crée la Release avec le classeur, le PDF et l'archive du site.
-4. `make deploy` pour mettre le site à jour sur OVH.
+4. `make deploy` pour mettre le site à jour sur OVH, puis `make indexnow`.
 
 ## Archivage
 
