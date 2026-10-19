@@ -5,13 +5,13 @@ DirectoryIndex index.html
 ErrorDocument 404 /404.html
 Options -Indexes
 
-# Forcer HTTPS. À décommenter seulement quand le certificat du sous-domaine est actif :
-# `openssl s_client -servername <sous-domaine> -connect <sous-domaine>:443` ne doit plus
-# renvoyer CN=cluster127.hosting.ovh.net (institutnr.org envoie HSTS includeSubDomains).
-# RewriteEngine On
-# RewriteCond %{HTTPS} !=on
-# RewriteCond %{HTTP:X-Forwarded-Proto} !https
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+# HTTPS et adresse unique https://clausier.institutnr.org/ (certificats actifs le 19/10/2026)
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.clausier\.institutnr\.org$ [NC]
+RewriteRule ^(.*)$ https://clausier.institutnr.org/$1 [R=301,L]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://clausier.institutnr.org/$1 [R=301,L]
 
 # Types de fichiers et encodage
 AddDefaultCharset UTF-8
