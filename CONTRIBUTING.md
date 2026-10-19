@@ -14,7 +14,7 @@ Il suffit d'un compte GitHub gratuit.
 
 Sans compte GitHub : écrivez à `contact@institutnr.org`.
 
-## 2. Modifier une clause directement dans le navigateur
+## 2. Modifier une clause depuis votre navigateur
 
 1. Ouvrez le fichier de la clause : `content/clauses/<segment>/<ID>.md`
    (ex. `content/clauses/cloud/CLD-Q-01.md`).

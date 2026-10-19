@@ -4,8 +4,8 @@ description: Informations à compléter par l'Institut du Numérique Responsable
 a_completer: true
 ---
 
-Cette page doit être complétée par l'INR avant toute mise en ligne. Les informations
-ci-dessous ne sont pas encore validées.
+L'INR doit compléter cette page avant la mise en ligne. Les informations ci-dessous
+attendent sa validation.
 
 - **Éditeur du site** : à compléter.
 - **Directeur ou directrice de la publication** : à compléter.
@@ -14,9 +14,9 @@ ci-dessous ne sont pas encore validées.
 
 ## Données personnelles et cookies
 
-Le site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience. La sélection
-de clauses est enregistrée dans le stockage local de votre navigateur ; elle n'est jamais
-transmise. Vous pouvez l'effacer depuis la page « Ma sélection ».
+Le site ne dépose aucun cookie et ne mesure pas l'audience. Votre navigateur garde votre
+sélection de clauses dans son stockage local ; le site ne la reçoit pas. Vous l'effacez
+depuis la page « Ma sélection ».
 
 ## Propriété intellectuelle
 

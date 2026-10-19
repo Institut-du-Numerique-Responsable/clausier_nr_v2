@@ -3,7 +3,8 @@ titre: Contribuer
 description: Signaler une erreur, proposer une modification ou une nouvelle clause.
 ---
 
-Le clausier est un document vivant. Les propositions d'actualisation sont bienvenues.
+L'INR met le clausier à jour à partir de vos propositions : corrections, références
+plus récentes, nouvelles clauses.
 
 ## Sans compte GitHub
 
@@ -13,13 +14,13 @@ avec la source qui justifie le changement.
 
 ## Avec un compte GitHub
 
-Le dépôt des sources accueille les signalements (issues) et les propositions de
-modification (pull requests). Le guide de contribution du dépôt explique chaque étape,
-y compris la modification d'une clause directement dans le navigateur.
+Ouvrez un signalement (issue) ou proposez une modification (pull request) sur le dépôt des
+sources. Son guide de contribution détaille chaque étape, y compris la modification d'une
+clause depuis votre navigateur, sans rien installer.
 
 ## Validation
 
-Une proposition ne modifie pas le clausier officiel. Elle est examinée par les mainteneurs
-désignés par l'INR, qui l'acceptent, la modifient ou la refusent en motivant leur choix.
-Les décisions de fond (seuils, classement Must have ou Nice to have, périmètre de la
-commande publique) relèvent du comité de pilotage.
+Les mainteneurs désignés par l'INR examinent chaque proposition avant toute modification
+du clausier officiel. Ils l'acceptent, l'amendent ou la refusent, et motivent leur choix.
+Le comité de pilotage tranche les questions de fond : seuils, classement Must have ou
+Nice to have, périmètre de la commande publique.

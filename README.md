@@ -1,11 +1,12 @@
 # Clausier Numérique Responsable
 
-Clauses types « numérique responsable » à intégrer dans les consultations et marchés IT :
-questionnaires d'évaluation des soumissionnaires (RFI/RFP) et exigences pour le cahier des
-charges (CCAP & CCTP), en deux niveaux, *Must have* et *Nice to have*.
+Vous achetez du matériel, du cloud, du logiciel, des prestations ou de l'IA ? Le clausier
+vous fournit des clauses « numérique responsable » prêtes à coller dans vos consultations :
+questionnaires pour évaluer les soumissionnaires (RFI/RFP) et exigences pour le cahier des
+charges (CCAP & CCTP), chacune en deux niveaux, *Must have* et *Nice to have*.
 
-Le clausier est coordonné par la French Tech Corporate Community (FTCC) et l'Institut du
-Numérique Responsable (INR). Sa version 2.0 (août 2026) compte 102 clauses réparties en six
+La French Tech Corporate Community (FTCC) et l'Institut du Numérique Responsable (INR)
+coordonnent le clausier. La version 2.0 (août 2026) compte 102 clauses, réparties en six
 segments d'achat.
 
 ## Accéder au clausier
@@ -14,15 +15,14 @@ segments d'achat.
 |---|---|
 | Page officielle | https://institutnr.org/clausier-numerique-ecoresponsable |
 | Document PDF (V2, 44 pages, fait foi) | [clausier-numerique-responsable-v2.pdf](https://institutnr.org/wp-content/uploads/2026/09/clausier-numerique-responsable-v2.pdf) |
-| Classeur Excel (catalogue, sélection, clauses retenues) | [Clausier-Numerique-Responsable-V2.xlsx](https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2/releases/latest/download/Clausier-Numerique-Responsable-V2.xlsx) (disponible à la première version publiée) |
+| Classeur Excel (catalogue, sélection, clauses retenues) | [Clausier-Numerique-Responsable-V2.xlsx](https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2/releases/latest/download/Clausier-Numerique-Responsable-V2.xlsx) |
 | Site de consultation (recherche, sélection, exports) | https://clausier.institutnr.org/ (mise en ligne en cours) |
 | Clauses au format texte | dossier [`content/clauses/`](content/clauses/) |
 
 ## Le principe d'un clausier
 
-Un clausier n'est pas un cahier des charges à reprendre en bloc. C'est une **bibliothèque de
-clauses prérédigées** dans laquelle chaque organisation **prend ce qu'elle estime nécessaire**
-et l'intègre à son propre processus d'achat :
+Le clausier fonctionne comme une **bibliothèque de clauses prérédigées**. Vous y **prenez ce
+que vous jugez utile** et vous l'intégrez à votre processus d'achat :
 
 - dans une **consultation** ou un **sourcing**, pour interroger le marché ;
 - dans un **RFI ou un RFP**, avec les questionnaires d'évaluation des soumissionnaires ;
@@ -30,20 +30,20 @@ et l'intègre à son propre processus d'achat :
   pendant l'exécution ;
 - dans un avenant, une convention de service ou une politique d'achat interne.
 
-Les clauses sont **prêtes à l'emploi mais restent ajustables**. Chaque entreprise, collectivité
-ou administration les adapte à son contexte : périmètre de l'achat, maturité du marché,
-contraintes de la commande publique, stratégie RSE, poids accordé à chaque critère. Les deux
-niveaux de chaque clause aident à calibrer l'ambition : le *Must have* comme socle, le
-*Nice to have* pour valoriser les offres les plus avancées.
+Vous pouvez reprendre une clause telle quelle ou l'**ajuster à votre contexte** : périmètre
+de l'achat, maturité du marché, règles de la commande publique, stratégie RSE, poids de
+chaque critère. Une entreprise, une collectivité et une administration n'en feront pas le
+même usage. Les deux niveaux vous aident à doser l'ambition : le *Must have* fixe le socle,
+le *Nice to have* valorise les offres les plus avancées.
 
-La licence CC BY 4.0 le permet expressément : reprenez, modifiez et intégrez les clauses,
-y compris dans un cadre commercial, en citant la source.
+La licence CC BY 4.0 vous autorise à reprendre, modifier et intégrer les clauses, y compris
+dans un cadre commercial, à condition de citer la source.
 
 ## Le dépôt
 
-Ce dépôt fait du clausier un référentiel ouvert et maintenable : **le texte des clauses est tenu en
-Markdown, un fichier par clause**. Le classeur Excel et le site sont générés à partir de ces
-fichiers ; on ne les modifie jamais à la main.
+Le dépôt tient le texte des clauses en **Markdown, un fichier par clause**. Des scripts en
+tirent le classeur Excel et le site : pour corriger une clause, vous modifiez son fichier
+Markdown, et la génération suivante met à jour les deux livrables.
 
 ```
 content/clauses/*.md  ──►  scripts/  ──►  dist/excel/   classeur Excel

@@ -9,7 +9,7 @@ Chaque segment d'achat propose un **questionnaire** pour évaluer les soumission
 (phase RFI/RFP) et des **exigences** à intégrer au cahier des charges (phase CCAP & CCTP).
 Chaque clause présente deux niveaux : le **Niveau 1 (Must have)**, socle attendu, et le
 **Niveau 2 (Nice to have)**, plus ambitieux. La page [Comment lire le clausier](../comment-lire/)
-reprend l'explication complète du document.
+reprend l'explication du document V2.
 
 ## Composer un clausier pour une consultation
 
@@ -21,7 +21,7 @@ reprend l'explication complète du document.
 
 ## Le classeur Excel
 
-Le [classeur](../telechargements/Clausier-Numerique-Responsable-V2.xlsx) offre le même
+Le [classeur](../telechargements/Clausier-Numerique-Responsable-V2.xlsx) propose le même
 parcours hors ligne : feuille « Catalogue » pour consulter, feuille « Sélection » pour
 choisir (« Oui » dans la colonne « Retenir »), feuille « Clauses retenues » pour récupérer
 le texte des clauses choisies.
@@ -32,5 +32,5 @@ Chaque clause a un identifiant stable, par exemple `COM-Q-01` : segment (COM pou
 exigences communes), partie (Q pour questionnaire, E pour exigences), numéro. L'adresse
 de sa page ne change pas : vous pouvez la partager.
 
-Les critères, leur poids et les exigences sont à adapter à la stratégie d'achat de votre
+Adaptez les critères, leur poids et les exigences à la stratégie d'achat de votre
 organisation.

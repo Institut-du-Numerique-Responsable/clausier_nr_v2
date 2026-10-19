@@ -191,15 +191,17 @@ réutilisation et modification libres, en citant la source. <a href="{r}credits/
 <div class="accueil">
 <div>
 <h1>Des clauses numérique responsable prêtes à intégrer dans vos achats IT</h1>
-<p class="chapo">Questionnaires pour évaluer les soumissionnaires et exigences pour le cahier des
-charges, en deux niveaux d'ambition. {len(self.clauses)} clauses, six segments d'achat, conçues
-par une cinquantaine d'entreprises et d'organisations publiques.</p>
+<p class="chapo">Prenez les clauses utiles à votre achat, ajustez-les à votre contexte et
+intégrez-les à votre consultation, votre RFI, votre RFP, votre cahier des charges ou votre
+contrat. {len(self.clauses)} clauses en six segments d'achat, rédigées par une cinquantaine
+d'entreprises et d'organisations publiques.</p>
 <div class="actions">
 <a class="bouton" href="clausier/">Parcourir les clauses</a>
 {f'<a class="bouton second" href="telechargements/{NOM_EXCEL}" download>{excel}</a>' if excel else ""}
 </div>
-<p>Cochez les clauses utiles à votre consultation, puis exportez-les depuis
-<a href="selection/">Ma sélection</a>. Aucun compte, aucune donnée transmise.</p>
+<p>Cochez les clauses qui vous servent, puis exportez-les depuis
+<a href="selection/">Ma sélection</a>. Pas de compte à créer ; votre sélection reste dans votre
+navigateur.</p>
 <p class="discret">Document d'origine : <a href="telechargements/{PDF_V2.name}">Clausier V2 en PDF</a>
 ({taille(PDF_V2)}, 44 pages). Version PDF générée depuis le site : à venir.</p>
 </div>
@@ -214,14 +216,14 @@ par une cinquantaine d'entreprises et d'organisations publiques.</p>
 <h2>Deux niveaux pour chaque critère</h2>
 <p>Le <b>Niveau 1 (Must have)</b> regroupe les éléments essentiels attendus dans la réponse.
 Le <b>Niveau 2 (Nice to have)</b> regroupe les éléments complémentaires qui renforcent et
-valorisent la réponse. Les critères, leur poids et les exigences sont à adapter à la stratégie
-d'achat de chaque organisation. <a href="comment-lire/">Comment lire le clausier</a></p>
+valorisent la réponse. Adaptez les critères, leur poids et les exigences à la stratégie
+d'achat de votre organisation. <a href="comment-lire/">Comment lire le clausier</a></p>
 <h2>Qui porte le clausier</h2>
 <p>La French Tech Corporate Community (FTCC) et l'Institut du Numérique Responsable (INR)
 coordonnent le clausier. Richard Bury et Claire Lardière (EDF) en ont piloté la réalisation.
 <a href="credits/">Voir les crédits</a></p>
-<p>Institut du Numérique Responsable : « organisation de référence promouvant les pratiques du
-numérique responsable » (lexique du V2). <a href="https://institutnr.org/">institutnr.org</a></p>
+<p>Pour en savoir plus sur l'Institut du Numérique Responsable :
+<a href="https://institutnr.org/clausier-numerique-ecoresponsable">la page du clausier sur institutnr.org</a>.</p>
 </div>
 """
         base = self.meta["liens"]["site"] or ""
