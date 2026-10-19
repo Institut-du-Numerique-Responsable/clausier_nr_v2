@@ -1,0 +1,62 @@
+# Publication des livrables en Release GitHub, sur tag de version (v2.0.1, v2.1.0…).
+# Le site lui-même est hébergé sur OVH (make deploy) : voir docs/publication.md.
+#
+# Les livrables sont joints à une Release GitHub sous des noms fixes. La page WordPress de
+# l'INR peut donc pointer vers des adresses stables, valables aussi après archivage du dépôt :
+#   https://github.com/<org>/<dépôt>/releases/latest/download/Clausier-Numerique-Responsable-V2.xlsx
+# Voir docs/publication.md.
+name: Publication
+
+on:
+  push:
+    tags: ["v*"]
+
+concurrency:
+  group: publication
+  cancel-in-progress: false
+
+jobs:
+  construire:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python scripts/validate.py
+      - run: python -m unittest discover -s tests
+      - name: Livrables
+        run: |
+          python scripts/build_excel.py
+          python scripts/build_site.py
+          mkdir -p dist/release
+          cp dist/excel/Clausier-Numerique-Responsable-V2.xlsx dist/release/
+          cp sources/originaux/clausier-numerique-responsable-v2.pdf dist/release/
+          (cd dist && zip -qr release/clausier-numerique-responsable-site.zip site)
+      - uses: actions/upload-artifact@v7
+        with:
+          name: release
+          path: dist/release/
+
+  release:
+    needs: construire
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: release
+          path: release
+      - name: Release GitHub avec les livrables
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" release/* \
+            --title "Clausier Numérique Responsable $GITHUB_REF_NAME" \
+            --notes "Livrables générés depuis $GITHUB_SHA. Historique : CHANGELOG.md."

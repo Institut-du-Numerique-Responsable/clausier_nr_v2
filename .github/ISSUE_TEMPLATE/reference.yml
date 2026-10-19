@@ -1,0 +1,18 @@
+name: Référence à ajouter
+description: Texte réglementaire, norme ou guide utile au clausier.
+labels: ["référence"]
+body:
+  - type: input
+    id: titre
+    attributes:
+      label: Titre exact de la référence
+    validations: {required: true}
+  - type: input
+    id: url
+    attributes:
+      label: Adresse officielle
+    validations: {required: true}
+  - type: input
+    id: clauses
+    attributes:
+      label: Clauses concernées (identifiants)

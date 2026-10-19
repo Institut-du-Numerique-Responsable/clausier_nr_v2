@@ -1,0 +1,27 @@
+# Rubriques autorisées dans le corps d'une clause (titres « ## »).
+#
+# Les titres reprennent les en-têtes de colonnes des tableaux du document V2.
+# « champ » est la colonne du classeur Excel où la rubrique est publiée. Le modèle
+# de colonnes (Critère, Commentaire, Exigences, Livrables, Questions, Niveau 1,
+# Niveau 2) est celui du classeur de préparation de Paul Saulnier.
+
+rubriques:
+  - {titre: "Commentaires", champ: commentaire}
+  - {titre: "Exigence", champ: exigences}
+  - {titre: "Exigences", champ: exigences}
+  - {titre: "Description / Spécifications de l'exigence", champ: exigences}
+  - {titre: "Questions", champ: questions}
+  - {titre: "Livrables", champ: livrables}
+  - {titre: "Niveau 1 (Must have)", champ: niveau_1}
+  - {titre: "Niveau 2 (Nice to have)", champ: niveau_2}
+
+# Libellés des en-têtes de la première colonne (intitulé de la clause) dans le V2.
+premiere_colonne: ["Critères", "Critère", "Exigences"]
+
+champs:
+  commentaire: "Commentaire"
+  exigences: "Exigences"
+  livrables: "Livrables"
+  questions: "Questions"
+  niveau_1: "Niveau 1 (Must have)"
+  niveau_2: "Niveau 2 (Nice to have)"

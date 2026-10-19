@@ -1,0 +1,3 @@
+# Dépendances facultatives : génération des visuels de présentation (make visuels).
+-r requirements.txt
+Pillow==11.3.0

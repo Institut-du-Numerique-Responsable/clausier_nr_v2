@@ -1,0 +1,16 @@
+# Livrables générés : publiés par la CI, pas versionnés
+dist/
+build/
+
+# Environnement
+.venv/
+__pycache__/
+*.pyc
+
+# Bureautique et système
+.~lock.*#
+~$*
+.DS_Store
+
+# Outils locaux
+.claude/
