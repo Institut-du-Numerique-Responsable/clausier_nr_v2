@@ -40,7 +40,7 @@ Première mise en ligne (une seule fois, dans l'espace client OVH) :
    `openssl s_client -servername <sous-domaine> -connect <sous-domaine>:443` renvoie
    `CN=cluster127.hosting.ovh.net`, le site reste inaccessible : institutnr.org envoie
    HSTS `includeSubDomains`. Compter 15 à 60 minutes après le passage en « Actif ».
-3. Décommenter ensuite la redirection HTTPS de `site/htaccess`, reconstruire, redéployer.
+3. Activer ensuite les redirections HTTPS et `www` de `site/htaccess`, reconstruire, redéployer (fait le 19/10/2026).
 4. Renseigner `liens.site` dans `data/metadata.yml`.
 
 Le `.htaccess` applique une CSP stricte (`script-src 'self'`, `style-src 'self'`) : le site
