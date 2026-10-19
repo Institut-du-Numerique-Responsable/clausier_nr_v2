@@ -8,8 +8,9 @@
 | Mainteneurs | Guillaume Gallon, Richard Bury, Vincent Courboulay, Paul Saulnier (fichier `.github/CODEOWNERS`) | Relisent et fusionnent les pull requests, publient les versions |
 | Contributeurs | Toute personne | Ouvrent des issues et des pull requests |
 
-Une contribution externe ne modifie jamais le clausier officiel par elle-même : la branche
-principale est protégée, toute fusion exige l'approbation d'un mainteneur.
+Un mainteneur approuve chaque pull request avant sa fusion dans `main`. À configurer sur
+GitHub : protection de la branche `main` avec revue obligatoire des CODEOWNERS (pas encore
+activée au 19 octobre 2026).
 
 ## Statuts d'une clause
 
