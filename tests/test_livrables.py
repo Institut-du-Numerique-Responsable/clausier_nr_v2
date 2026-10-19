@@ -221,6 +221,9 @@ class TestSite(unittest.TestCase):
     def test_referencement_et_ia(self):
         for f in ("robots.txt", "llms.txt", "llms-full.txt"):
             self.assertTrue((self.site / f).exists(), f)
+        cle = clausier.load_yaml("metadata.yml").get("indexnow_cle")
+        if cle:
+            self.assertEqual((self.site / f"{cle}.txt").read_text(encoding="utf-8"), cle)
         full = (self.site / "llms-full.txt").read_text(encoding="utf-8")
         for c in CLAUSES:
             self.assertIn(f"### {c.id} — {c['titre']}", full)
