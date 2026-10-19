@@ -6,8 +6,8 @@ Audit réalisé le 19 octobre 2026 sur le répertoire de travail `clausier_v2/`.
 
 | Fichier (répertoire de travail) | Nature | Date | Taille | Rôle retenu |
 |---|---|---|---|---|
-| `odt/clausier-numerique-responsable-v2.odt` | Document maître V2, OpenDocument | 11 août 2026 | 347 Ko | **Référence textuelle de la migration** |
-| `pdf/clausier-numerique-responsable-v2.pdf` | Rendu LibreOffice du maître, 44 pages A4, PDF balisé | 11 août 2026 | 1,3 Mo | Référence de pagination et contrôle du rendu |
+| `odt/clausier-numerique-responsable-v2.odt` | Document maître V2, OpenDocument | 11 août 2026 | 347 Ko | Outil d'extraction : structure des tableaux, mise en forme |
+| `pdf/clausier-numerique-responsable-v2.pdf` | Rendu LibreOffice du maître, 44 pages A4, PDF balisé | 11 août 2026 | 1,3 Mo | **Document qui fait foi** (décision INR du 19 octobre 2026) ; identique au PDF publié sur institutnr.org (même SHA-256) |
 | `prepa excell/Clausier NR V2.xlsx` | Classeur de préparation, Paul Saulnier | 30 sept. 2026 | 131 Ko | Référence fonctionnelle et ergonomique du classeur |
 | `old/sources/20260515-clausier-relecture-commentee.docx` | Copie de relecture, 83 commentaires | 15 mai 2026 | 1,3 Mo | Non reprise (a divergé du maître, voir README d'origine) |
 | `old/sources/202606-clausier-interne-v1-relecture.pdf` | PDF de relecture V1 interne | juin 2026 | 1,2 Mo | Non reprise |

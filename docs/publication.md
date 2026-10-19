@@ -6,14 +6,14 @@
 |---|---|
 | Page officielle (point d'entrée public) | https://institutnr.org/clausier-numerique-ecoresponsable (WordPress de l'INR) |
 | Sources, issues, pull requests, Releases | https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2 |
-| Site de consultation | Hébergement OVH mutualisé de l'INR (`ovh-cluster127`), dossier `~/clausier` proposé, sous-domaine à créer |
+| Site de consultation | https://clausier.institutnr.org/ : hébergement OVH mutualisé de l'INR (`ovh-cluster127`), dossier `~/clausier` (Multisite créé le 19/10/2026, avec `www.clausier`) |
 | Classeur Excel, PDF du V2, archive du site | Releases GitHub, noms de fichiers fixes |
 
 ## Liens à mettre sur la page WordPress
 
 | Lien | Adresse |
 |---|---|
-| Consulter le clausier en ligne | adresse du sous-domaine OVH (à créer, ex. `https://clausier.institutnr.org/`) |
+| Consulter le clausier en ligne | `https://clausier.institutnr.org/` |
 | Télécharger le classeur Excel | `https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2/releases/latest/download/Clausier-Numerique-Responsable-V2.xlsx` |
 | Télécharger le PDF | `https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2/releases/latest/download/clausier-numerique-responsable-v2.pdf` |
 | Contribuer sur GitHub | `https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2` |

@@ -30,6 +30,8 @@ EXCEL = ROOT / "dist/excel/Clausier-Numerique-Responsable-V2.xlsx"
 PDF_V2 = ROOT / "sources/originaux/clausier-numerique-responsable-v2.pdf"
 NOM_EXCEL = "Clausier-Numerique-Responsable-V2.xlsx"   # nom publié, cité par les pages
 NIVEAUX = ("Niveau 1 (Must have)", "Niveau 2 (Nice to have)")
+DESC = ("Clausier Numérique Responsable de l'INR et de la FTCC : 102 clauses types pour intégrer "
+        "le numérique responsable dans les achats IT (RFI/RFP, CCAP/CCTP, contrats). Licence CC BY 4.0.")
 STATUTS = {"brouillon": "brouillon", "en_revision": "en révision", "validee": "validée",
            "archivee": "archivée"}
 
@@ -77,9 +79,31 @@ class Site:
     def phase(self, c):
         return self.segs["phases"][c["phase"]]["libelle"]
 
-    def write(self, rel, body, titre, desc="", actif=""):
+    def head_seo(self, rel, titre, desc, jsonld):
+        """URL canonique, OpenGraph et JSON-LD : adresses absolues, si l'URL du site est connue."""
+        base = self.meta["liens"]["site"]
+        out = []
+        if base and not rel.endswith(".html"):
+            url = base + rel
+            out += [f'<link rel="canonical" href="{url}">', f'<meta property="og:url" content="{url}">']
+        out += ['<meta property="og:type" content="website">', '<meta property="og:locale" content="fr_FR">',
+                f'<meta property="og:site_name" content="{esc(self.meta["titre"])}">',
+                f'<meta property="og:title" content="{esc(titre)}">',
+                f'<meta property="og:description" content="{esc(desc)}">']
+        if jsonld:
+            data = json.dumps(jsonld, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+            out.append(f'<script type="application/ld+json">{data}</script>')
+        return "\n".join(out)
+
+    def org(self):
+        return [{"@type": "Organization", "name": "Institut du Numérique Responsable (INR)",
+                 "url": "https://institutnr.org/"},
+                {"@type": "Organization", "name": "French Tech Corporate Community (FTCC)"}]
+
+    def write(self, rel, body, titre, desc="", actif="", jsonld=None):
         depth = rel.count("/")
         r = "../" * depth
+        desc = desc or DESC
         nav = [("", "Accueil"), ("clausier/", "Clausier"), ("mode-emploi/", "Mode d'emploi"),
                ("a-propos/", "À propos"), ("contribuer/", "Contribuer")]
         items = "".join(
@@ -100,7 +124,8 @@ class Site:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(titre)}{"" if titre == self.meta["titre"] else " — " + self.meta["titre"]}</title>
-<meta name="description" content="{esc(desc or 'Clauses types numérique responsable pour les achats IT : questionnaires RFI/RFP et exigences CCAP/CCTP.')}">
+<meta name="description" content="{esc(desc)}">
+{self.head_seo(rel, titre, desc, jsonld)}
 <link rel="stylesheet" href="{r}assets/style.css?v={self.version_assets}">
 <script src="{r}assets/js.js?v={self.version_assets}"></script>
 <script src="{r}assets/clausier.js?v={self.version_assets}" defer></script>
@@ -199,7 +224,33 @@ coordonnent le clausier. Richard Bury et Claire Lardière (EDF) en ont piloté l
 numérique responsable » (lexique du V2). <a href="https://institutnr.org/">institutnr.org</a></p>
 </div>
 """
-        self.write("", body, self.meta["titre"], actif="")
+        base = self.meta["liens"]["site"] or ""
+        lic = self.meta["licence_contenu"]
+        dataset = {
+            "@context": "https://schema.org", "@type": "Dataset",
+            "name": f'{self.meta["titre"]} V{self.meta["version"]}',
+            "description": DESC, "inLanguage": "fr", "version": self.meta["version"],
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "creditText": lic["attribution"], "creator": self.org(),
+            "keywords": ["numérique responsable", "achats responsables", "clausier", "RFI", "RFP",
+                         "CCAP", "CCTP", "écoconception", "accessibilité numérique", "commande publique"],
+            "isAccessibleForFree": True,
+            "distribution": [
+                {"@type": "DataDownload", "encodingFormat":
+                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                 "contentUrl": f"{base}telechargements/{NOM_EXCEL}"},
+                {"@type": "DataDownload", "encodingFormat": "application/pdf",
+                 "contentUrl": f"{base}telechargements/{PDF_V2.name}"},
+                {"@type": "DataDownload", "encodingFormat": "application/json",
+                 "contentUrl": f"{base}donnees/clauses.json"},
+                {"@type": "DataDownload", "encodingFormat": "text/markdown",
+                 "contentUrl": f"{base}llms-full.txt"}],
+        }
+        if base:
+            dataset["url"] = base
+        if self.meta["depot"]["url"]:
+            dataset["sameAs"] = [self.meta["depot"]["url"], self.meta["liens"]["page_inr"]]
+        self.write("", body, self.meta["titre"], actif="", jsonld=dataset)
 
     def catalogue(self):
         r = "../"
@@ -295,7 +346,18 @@ puis cochez « Retenir » pour composer votre sélection.</p>
 <nav class="voisins" aria-label="Clauses voisines">{voisin(prev_c, "Précédente :")}{voisin(next_c, "Suivante :")}</nav>
 """
         desc = f"{c.id} : {c['titre']}. {self.phase(c)}, segment {seg['libelle']}."
-        self.write(f"clausier/clauses/{c.id}/", body, f"{c.id} {c['titre']}", desc, actif="clausier/")
+        base = self.meta["liens"]["site"] or ""
+        ld = {"@context": "https://schema.org", "@type": "CreativeWork", "identifier": c.id,
+              "name": f"{c.id} — {c['titre']}", "description": desc, "inLanguage": "fr",
+              "genre": "Clause contractuelle type", "about": seg["titre_source"],
+              "isPartOf": {"@type": "Dataset", "name": f'{self.meta["titre"]} V{self.meta["version"]}',
+                           **({"url": base} if base else {})},
+              "license": "https://creativecommons.org/licenses/by/4.0/",
+              "creditText": self.meta["licence_contenu"]["attribution"], "creator": self.org()}
+        if base:
+            ld["url"] = f"{base}clausier/clauses/{c.id}/"
+        self.write(f"clausier/clauses/{c.id}/", body, f"{c.id} {c['titre']}", desc, actif="clausier/",
+                   jsonld=ld)
 
     def segment(self, s):
         r = "../../../"
@@ -426,6 +488,59 @@ cochez « Retenir » sur celles qui servent votre consultation.</p>
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(json.dumps(d, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
+    def robots_et_ia(self):
+        """robots.txt, sitemap.xml, llms.txt (index) et llms-full.txt (texte intégral)."""
+        base = self.meta["liens"]["site"]
+        lic = self.meta["licence_contenu"]
+        pages = sorted(p.relative_to(self.out).parent.as_posix() for p in self.out.rglob("index.html"))
+        pages = ["" if p == "." else p + "/" for p in pages if p not in ("selection",)]
+        robots = ["# Clausier Numérique Responsable : contenu sous licence CC BY 4.0, à citer.",
+                  "User-agent: *", "Allow: /", "", "# Index pour les moteurs génératifs : /llms.txt",
+                  "# Texte intégral du clausier : /llms-full.txt"]
+        if base:
+            robots += ["", f"Sitemap: {base}sitemap.xml"]
+            urls = "".join(f"<url><loc>{base}{p}</loc></url>" for p in pages)
+            (self.out / "sitemap.xml").write_text(
+                '<?xml version="1.0" encoding="UTF-8"?>\n'
+                f'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n',
+                encoding="utf-8")
+        (self.out / "robots.txt").write_text("\n".join(robots) + "\n", encoding="utf-8")
+        b = base or ""
+        idx = [f"# {self.meta['titre']} V{self.meta['version']}", "",
+               f"> {DESC}", "",
+               "Bibliothèque de clauses prérédigées : chaque organisation y prend ce qu'elle juge "
+               "nécessaire et l'adapte à son contexte (consultation, RFI, RFP, cahier des charges, contrat). "
+               "Chaque clause propose deux niveaux : Niveau 1 (Must have) et Niveau 2 (Nice to have).", "",
+               f"Licence : {lic['nom']}. Citer : {lic['attribution']}", "",
+               "## Documents", "",
+               f"- [Texte intégral de toutes les clauses (Markdown)]({b}llms-full.txt)",
+               f"- [Classeur Excel]({b}telechargements/{NOM_EXCEL})",
+               f"- [Document PDF V2, qui fait foi]({b}telechargements/{PDF_V2.name})",
+               f"- [Données JSON]({b}donnees/clauses.json)",
+               f"- [Comment lire le clausier]({b}comment-lire/)",
+               f"- [Page officielle sur institutnr.org]({self.meta['liens']['page_inr']})"]
+        if self.meta["depot"]["url"]:
+            idx.append(f"- [Sources sur GitHub]({self.meta['depot']['url']})")
+        full = [f"# {self.meta['titre']} V{self.meta['version']} — texte intégral", "",
+                f"> {lic['mention']} Citer : {lic['attribution']}", ""]
+        for s_ in self.segs["segments"]:
+            idx += ["", f"## {s_['numero']}. {s_['libelle']}", ""]
+            full += [f"# {s_['titre_source']}", ""]
+            for sec in s_["sections"]:
+                full += [f"## {sec['titre_source']}", ""]
+                for c in (x for x in self.clauses if x["section"] == sec["numero"]):
+                    idx.append(f"- [{c.id} — {c['titre']}]({b}clausier/clauses/{c.id}/): {self.phase(c)}")
+                    full += [f"### {c.id} — {c['titre']}", "",
+                             f"Segment : {s_['libelle']}{' / ' + self.sous(c) if self.sous(c) else ''}. "
+                             f"Partie : {self.phase(c)}. Adresse : {b}clausier/clauses/{c.id}/", ""]
+                    for t, m in c.rubriques:
+                        full += [f"#### {t}", "", m, ""]
+                    full += [f"[^{n}]: {t}" for n, t in c.notes.items()]
+                    if c.notes:
+                        full.append("")
+        (self.out / "llms.txt").write_text("\n".join(idx) + "\n", encoding="utf-8")
+        (self.out / "llms-full.txt").write_text("\n".join(full) + "\n", encoding="utf-8")
+
     def build(self):
         if self.out.exists():
             shutil.rmtree(self.out)
@@ -448,6 +563,7 @@ cochez « Retenir » sur celles qui servent votre consultation.</p>
         self.write("404.html", '<div class="texte"><h1>Page introuvable</h1><p>Cette adresse ne '
                    'correspond à aucune page. Les clauses sont listées dans le '
                    '<a href="clausier/">catalogue</a>.</p></div>', "Page introuvable")
+        self.robots_et_ia()
         (self.out / ".nojekyll").write_text("", encoding="utf-8")
         shutil.copy2(ROOT / "site/htaccess", self.out / ".htaccess")
         return len(list(self.out.rglob("*.html")))

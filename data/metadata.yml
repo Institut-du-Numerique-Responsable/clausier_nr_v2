@@ -2,6 +2,7 @@
 # marqués « a_valider » attendent une décision des responsables INR / FTCC.
 
 titre: "Clausier Numérique Responsable"
+document_de_reference: "sources/originaux/clausier-numerique-responsable-v2.pdf"   # fait foi (INR, 19/10/2026)
 version: "2.0"
 date_source: "Aout 2026"   # graphie de la page de couverture du V2
 editeurs:
@@ -41,5 +42,5 @@ depot:
 # et le PDF ; le site renvoie vers la page WordPress. Voir docs/publication.md.
 liens:
   page_inr: "https://institutnr.org/clausier-numerique-ecoresponsable"
-  site: null         # adresse du site sur l'hébergement OVH de l'INR (cluster127), à fournir
-  hebergement: "OVH mutualisé, cluster127 (alias SSH ovh-cluster127), dossier ~/clausier proposé"
+  site: "https://clausier.institutnr.org/"   # sous-domaine dédié (INR, 19/10/2026)
+  hebergement: "OVH mutualisé, cluster127 (alias SSH ovh-cluster127), dossier dédié au sous-domaine"

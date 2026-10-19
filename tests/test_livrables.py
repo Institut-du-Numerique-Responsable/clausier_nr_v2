@@ -44,7 +44,9 @@ class TestExcel(unittest.TestCase):
 
     def test_feuilles(self):
         self.assertEqual(self.wb.sheetnames, ["Présentation", "Catalogue", "Sélection",
-                                              "Clauses retenues", "Lexique", "Références", "Crédits"])
+                                              "Clauses retenues", "Lexique", "Références", "Crédits",
+                                              "Données"])
+        self.assertEqual(self.wb["Données"].sheet_state, "hidden")
 
     def test_catalogue_complet_et_fidele(self):
         ws = self.wb["Catalogue"]
@@ -99,6 +101,35 @@ class TestExcel(unittest.TestCase):
         self.assertEqual([ret.cell(r, 2).value for r in range(3, 6)], ["COM-Q-13", "MAT-Q-02", "IA-Q-06"])
         self.assertIn(ret.cell(6, 2).value, (None, ""))
         self.assertEqual(ret["C5"].value, "Sobriété du Modèle")
+        # les listes gardent leurs sauts de ligne (H = Niveau 1)
+        self.assertIn("\n• ", ret["H3"].value)
+        erreurs = [c.coordinate for ws in wb for row in ws.iter_rows() for c in row
+                   if isinstance(c.value, str) and c.value.startswith("#")]
+        self.assertEqual(erreurs, [])
+
+
+class TestAllerRetourExcel(unittest.TestCase):
+    @unittest.skipUnless(shutil.which("soffice"), "LibreOffice absent")
+    def test_toutes_les_clauses_retenues_sans_perte(self):
+        """102 clauses retenues : chaque cellule recalculée égale le texte Markdown."""
+        src = TMP / "tout.xlsx"
+        build_excel.build(src, preselect=IDS)
+        out = TMP / "tout-lo"
+        subprocess.run(["soffice", "--headless", "--convert-to", "xlsx", "--outdir", str(out), str(src)],
+                       check=True, capture_output=True, timeout=180)
+        wb = openpyxl.load_workbook(out / "tout.xlsx", data_only=True)
+        ret = wb["Clauses retenues"]
+        head = [c.value for c in ret[2]]
+        champ = {r["titre"]: r["champ"] for r in clausier.load_yaml("colonnes.yml")["rubriques"]}
+        noms = clausier.load_yaml("colonnes.yml")["champs"]
+        for i, c in enumerate(CLAUSES, start=3):
+            self.assertEqual(ret.cell(i, 2).value, c.id)
+            self.assertEqual(ret.cell(i, 3).value, c["titre"])
+            attendu = {k: "" for k in noms}
+            for titre, md in c.rubriques:
+                attendu[champ[titre]] = clausier.md_to_plain(md, c.notes)
+            for k, h in noms.items():
+                self.assertEqual(ret.cell(i, head.index(h) + 1).value or "", attendu[k], f"{c.id} {h}")
         erreurs = [c.coordinate for ws in wb for row in ws.iter_rows() for c in row
                    if isinstance(c.value, str) and c.value.startswith("#")]
         self.assertEqual(erreurs, [])
@@ -119,7 +150,8 @@ class Liens(HTMLParser):
         for k in ("href", "src"):
             if a.get(k):
                 self.refs.append(a[k])
-        if tag in ("script", "link") and (a.get("src") or a.get("href") or "").startswith("http"):
+        chargee = tag == "script" or (tag == "link" and a.get("rel") in ("stylesheet", "preload", "icon"))
+        if chargee and (a.get("src") or a.get("href") or "").startswith("http"):
             self.ext.append(a.get("src") or a.get("href"))
         if tag == "button":
             self._btn = ""
@@ -179,11 +211,27 @@ class TestSite(unittest.TestCase):
         """L'hébergeur applique script-src 'self' et style-src 'self' : rien d'inline."""
         for p in self.pages():
             h = p.read_text(encoding="utf-8")
-            self.assertNotRegex(h, r"<script(?![^>]*\bsrc=)[^>]*>", p)
+            self.assertNotRegex(h, r"<script(?![^>]*\b(src=|type=\"application/ld\+json\"))[^>]*>", p)
             self.assertNotIn("<style", h, p)
             self.assertNotRegex(h, r"\sstyle=\"", p)
             self.assertNotRegex(h, r"\son[a-z]+=\"", p)
         self.assertTrue((self.site / ".htaccess").exists())
+
+    def test_referencement_et_ia(self):
+        for f in ("robots.txt", "llms.txt", "llms-full.txt"):
+            self.assertTrue((self.site / f).exists(), f)
+        full = (self.site / "llms-full.txt").read_text(encoding="utf-8")
+        for c in CLAUSES:
+            self.assertIn(f"### {c.id} — {c['titre']}", full)
+            for _, md in c.rubriques:
+                self.assertIn(md, full, c.id)
+        page = (self.site / "clausier/clauses/CLD-Q-01/index.html").read_text(encoding="utf-8")
+        ld = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', page).group(1))
+        self.assertEqual(ld["identifier"], "CLD-Q-01")
+        self.assertEqual(ld["license"], "https://creativecommons.org/licenses/by/4.0/")
+        if clausier.load_yaml("metadata.yml")["liens"]["site"]:
+            self.assertIn('rel="canonical"', page)
+            self.assertTrue((self.site / "sitemap.xml").exists())
 
     def test_budgets_de_poids(self):
         for p in self.site.rglob("*"):

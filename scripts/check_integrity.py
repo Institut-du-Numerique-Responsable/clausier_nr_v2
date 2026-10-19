@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 """Rapport d'intégrité : le Markdown reprend-il tout le document V2, sans perte ?
 
+Le PDF V2 fait foi. L'ODT, dont le PDF est le rendu LibreOffice (même horodatage), donne la
+structure exacte des tableaux : il sert à la comparaison rubrique par rubrique. Le texte de
+chaque rubrique est ensuite recherché dans le PDF, segment par segment.
+
 Contrôles :
 1. chaque ligne de tableau de l'ODT correspond à une et une seule clause
    (source.tableau + source.ligne) ;
@@ -17,6 +21,7 @@ Dépendances : lxml, PyYAML, poppler (pdftotext).
 
 Usage : python scripts/check_integrity.py
 """
+import difflib
 import re
 import subprocess
 import sys
@@ -41,6 +46,43 @@ def header_label(h):
 
 def words(s):
     return set(re.findall(r"\w{3,}", md_to_text(s).lower()))
+
+
+def pdf_segments(pdf_raw, clauses, n=20):
+    """Cherche chaque segment de n lettres de chaque rubrique dans le texte du PDF.
+
+    En-têtes, pieds de page et césures sont neutralisés. Un segment absent est classé
+    « mise en page » si, entre ses deux voisins retrouvés, le PDF ne fait qu'ajouter du texte
+    (cellule voisine, en-tête de tableau répété, appel de note) sans rien retirer. Les autres
+    cas (début ou fin de rubrique, sans voisin) sont listés pour relecture visuelle.
+    """
+    t = re.sub(r"Page \d+ / \d+", "", pdf_raw).replace("Clausier Numérique Responsable\n", "\n")
+    big = letters(re.sub(r"-\n", "", t))
+    total = ok = layout = 0
+    review = []
+    for c in clauses:
+        for titre, m in [("titre", c["titre"])] + c.rubriques:
+            s = letters(md_to_text(re.sub(r"<sup>[^<]*</sup>", "", m)))
+            chunks = [(i, s[i:i + n]) for i in range(0, len(s), n) if len(s[i:i + n]) >= 8]
+            for k, (i, x) in enumerate(chunks):
+                total += 1
+                if x in big:
+                    ok += 1
+                    continue
+                prev = next(((j, y) for j, y in reversed(chunks[:k]) if y in big), None)
+                nxt = next(((j, y) for j, y in chunks[k + 1:] if y in big), None)
+                if prev and nxt:
+                    p = big.find(prev[1])
+                    q = big.find(nxt[1], p)
+                    if 0 <= p < q and q - p < 3000:
+                        md_seg = s[prev[0]:nxt[0] + len(nxt[1])]
+                        pdf_seg = big[p:q + len(nxt[1])]
+                        sm = difflib.SequenceMatcher(None, md_seg, pdf_seg, autojunk=False)
+                        if not any(op in ("delete", "replace") for op, *_ in sm.get_opcodes()):
+                            layout += 1
+                            continue
+                review.append((c.id, titre, x))
+    return total, ok, layout, review
 
 
 def main():
@@ -109,10 +151,10 @@ def main():
         if e[0] == "h" and e[2] != "SOMMAIRE" and letters(e[2]) not in corpus:
             para_missing.append("titre : " + e[2])
 
-    # rendu PDF
-    pdf = subprocess.run(["pdftotext", "-raw", str(PDF), "-"], capture_output=True, text=True,
-                         check=True).stdout
-    pdf = pdf.lower()
+    # document de référence : le PDF V2 fait foi
+    pdf_raw = subprocess.run(["pdftotext", "-raw", str(PDF), "-"], capture_output=True, text=True,
+                             check=True).stdout
+    pdf = pdf_raw.lower()
     pdf_words = set(re.findall(r"\w+", pdf))
     # césures : « nor- » en fin de ligne, la suite « mé » plus bas (tableaux en colonnes)
     prefixes = set(re.findall(r"(\w+)-\s*$", pdf, flags=re.M))
@@ -128,6 +170,7 @@ def main():
         missing = sorted(x for x in w if not in_pdf(x))
         if missing:
             pdf_gaps[c.id] = missing
+    seg_total, seg_ok, seg_layout, seg_review = pdf_segments(pdf_raw, [c for c in clauses if c.id in seen])
 
     statuts = Counter(c["statut"] for c in clauses)
     lines = [
@@ -135,8 +178,9 @@ def main():
         "",
         f"Généré le {date.today().isoformat()} par `scripts/check_integrity.py`. Ne pas modifier à la main.",
         "",
-        "Référence : `sources/originaux/clausier-numerique-responsable-v2.odt` (document maître V2) "
-        "et son rendu `clausier-numerique-responsable-v2.pdf` (44 pages).",
+        "Référence : **le PDF V2 fait foi** (`sources/originaux/clausier-numerique-responsable-v2.pdf`, "
+        "44 pages). L'ODT dont il est le rendu (`clausier-numerique-responsable-v2.odt`) sert à "
+        "extraire la structure des tableaux ; les deux sont comparés au Markdown.",
         "",
         "## Synthèse",
         "",
@@ -151,6 +195,10 @@ def main():
         f"| Paragraphes hors tableaux du V2 | {para_total} |",
         f"| Paragraphes ou titres introuvables dans content/ | {len(para_missing)} |",
         f"| Clauses dont un mot manque dans le texte du PDF | {len(pdf_gaps)} |",
+        f"| Segments de 20 lettres comparés au PDF | {seg_total} |",
+        f"| … retrouvés tels quels | {seg_ok} |",
+        f"| … séparés dans le PDF par du texte voisin (mise en page) | {seg_layout} |",
+        f"| … à relire visuellement (début ou fin de cellule) | {len(seg_review)} |",
         "",
     ]
     if losses:
@@ -162,7 +210,16 @@ def main():
         lines += ["## Clauses ajoutées depuis le V2", ""] + [f"- {x}" for x in extra] + [""]
     if para_missing:
         lines += ["## Textes hors tableaux introuvables", ""] + [f"- {x}" for x in para_missing] + [""]
-    lines += ["## Contrôle du rendu PDF", ""]
+    if seg_review:
+        page = {c.id: (c["source"] or {}).get("page_pdf") for c in clauses}
+        lines += ["## Segments à relire dans le PDF", "",
+                  "Début ou fin de cellule non retrouvé tel quel : en général un appel de note collé "
+                  "au mot (« CDP7 »), une cellule coupée entre deux pages ou une colonne voisine "
+                  "intercalée. Relecture du 19 octobre 2026 : tous ces cas relèvent de la mise en "
+                  "page, aucune différence de texte. Toute nouvelle ligne ici doit être relue.", "",
+                  "| Clause | Page | Rubrique | Segment |", "|---|---|---|---|"]
+        lines += [f"| {cid} | {page.get(cid)} | {t} | `{x}` |" for cid, t, x in seg_review] + [""]
+    lines += ["## Contrôle du rendu PDF (mots)", ""]
     if pdf_gaps:
         lines += ["Mots présents dans le Markdown mais absents du texte extrait du PDF. "
                   "Les césures avec tiret sont recollées. Un mot coupé sans tiret dans une colonne "

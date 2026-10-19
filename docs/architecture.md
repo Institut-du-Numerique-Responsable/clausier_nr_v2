@@ -22,7 +22,7 @@ scripts. Il ne dépend que de PyYAML.
 | Décision | Choix | Raison |
 |---|---|---|
 | Source de référence | Markdown + en-tête YAML, un fichier par clause | Lisible, modifiable dans le navigateur GitHub, diff ligne à ligne, aucun outil propriétaire |
-| Référence textuelle de la migration | ODT V2, pas le PDF ni le classeur | Structure exacte des tableaux, fusions, gras ; le classeur porte des altérations de copier-coller (voir audit) |
+| Référence | Le PDF V2 fait foi ; l'ODT dont il est le rendu sert à l'extraction ; le classeur n'est pas une source textuelle | L'ODT donne la structure exacte des tableaux ; chaque texte extrait est vérifié dans le PDF ; le classeur porte des altérations de copier-coller (voir audit) |
 | Outillage | Python seul | Un seul langage pour validation, Excel et site ; 5 dépendances figées |
 | Générateur de site | Script Python maison (~400 lignes) plutôt qu'Astro | Astro ajouterait Node et plusieurs centaines de paquets npm pour 120 pages simples ; le script n'a que PyYAML et Markdown comme dépendances et reste lisible par un contributeur Python |
 | Base de données, back-end | Aucun | 102 fichiers suffisent ; la sélection est stockée dans le navigateur |
