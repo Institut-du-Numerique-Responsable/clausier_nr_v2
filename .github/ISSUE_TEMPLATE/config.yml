@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Écrire à l'INR (sans compte GitHub)
+    url: mailto:contact@institutnr.org
+    about: Pour toute proposition, si vous préférez le courriel.

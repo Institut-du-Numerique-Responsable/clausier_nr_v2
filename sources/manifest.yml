@@ -1,0 +1,15 @@
+# Sources de référence du clausier. Fichiers à ne jamais modifier.
+# Les empreintes sont contrôlées par tests/test_contenu.py.
+fichiers:
+  - chemin: originaux/clausier-nr-v2-prepa-excel-paul-saulnier.xlsx
+    description: "Classeur de préparation réalisé par Paul Saulnier (30 septembre 2026)"
+    nom_d_origine: "prepa excell/Clausier NR V2.xlsx"
+    sha256: 28912b4acfb3e72b92e4b4b015748da8a9eafca8f93f618c6adf22904d02394f
+  - chemin: originaux/clausier-numerique-responsable-v2.odt
+    description: "Document maître V2 (août 2026), référence textuelle de la migration"
+    nom_d_origine: "odt/clausier-numerique-responsable-v2.odt"
+    sha256: 298a7c997cb732da0306ac4b7ac89beb125031a4ce77d5e45cff15065f54af24
+  - chemin: originaux/clausier-numerique-responsable-v2.pdf
+    description: "Rendu PDF du V2, 44 pages, référence de pagination"
+    nom_d_origine: "pdf/clausier-numerique-responsable-v2.pdf"
+    sha256: ba578c21017b08ea630a10a914a84669771349267fcad1ecd49e4c81b26f1153

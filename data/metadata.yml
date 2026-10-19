@@ -1,0 +1,45 @@
+# Métadonnées du clausier. Les valeurs reprennent le document V2 ; les points
+# marqués « a_valider » attendent une décision des responsables INR / FTCC.
+
+titre: "Clausier Numérique Responsable"
+version: "2.0"
+date_source: "Aout 2026"   # graphie de la page de couverture du V2
+editeurs:
+  - "French Tech Corporate Community (FTCC)"
+  - "Institut du Numérique Responsable (INR)"
+pilotage:
+  - "Richard BURY, Directeur du programme Numérique Responsable du Groupe EDF"
+  - "Claire LARDIERE, Chef de projet Numérique Responsable chez EDF SA"
+
+licence_contenu:
+  # Décision INR du 19 octobre 2026 : réutilisation et modification libres, y compris
+  # commerciales, à condition de citer la source (D-01). Accord de la FTCC, co-titulaire
+  # des droits, à confirmer.
+  identifiant: "CC-BY-4.0"
+  nom: "Creative Commons Attribution 4.0 International (CC BY 4.0)"
+  court: "CC BY 4.0"
+  url: "https://creativecommons.org/licenses/by/4.0/deed.fr"
+  mention: "Clausier Numérique Responsable © 2026 French Tech Corporate Community (FTCC) & Institut du Numérique Responsable (INR), sous licence CC BY 4.0."
+  # Formule à reprendre par toute personne qui réutilise ou adapte le clausier.
+  attribution: "Clausier Numérique Responsable, Institut du Numérique Responsable (INR) et French Tech Corporate Community (FTCC), licence CC BY 4.0, https://creativecommons.org/licenses/by/4.0/deed.fr"
+  accord_ftcc: a_confirmer
+  # Mention d'origine, portée par le PDF V2 et le classeur de préparation (inchangés).
+  mention_v2: "Clausier Numérique Responsable © 2026 by French Tech Corporate Community (FTCC) & Institut du Numérique Responsable (INR) is licensed under CC BY-NC-ND 4.0."
+
+contact:
+  # Adresse retenue par l'INR le 19 octobre 2026 (D-04 tranché).
+  propositions: "contact@institutnr.org"
+  # Le V2 cite aussi clausier_nr@institutnr.org (page 44) ; texte du V2 inchangé.
+  adresse_citee_page_44_du_v2: "clausier_nr@institutnr.org"
+
+depot:
+  organisation: "Institut-du-Numerique-Responsable"
+  nom: "clausier_nr_v2"   # choix de l'INR, 19 octobre 2026
+  url: "https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2"
+
+# Liens publics. La page WordPress de l'INR renvoie vers le dépôt, le site, le classeur
+# et le PDF ; le site renvoie vers la page WordPress. Voir docs/publication.md.
+liens:
+  page_inr: "https://institutnr.org/clausier-numerique-ecoresponsable"
+  site: null         # adresse du site sur l'hébergement OVH de l'INR (cluster127), à fournir
+  hebergement: "OVH mutualisé, cluster127 (alias SSH ovh-cluster127), dossier ~/clausier proposé"

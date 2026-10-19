@@ -1,0 +1,43 @@
+# Contrôles sur chaque pull request et sur la branche principale.
+# Aucune publication ici : voir publication.yml.
+name: Contrôles
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  controles:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Outils système (pdftotext, LibreOffice)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils libreoffice-calc
+      - name: Dépendances
+        run: pip install -r requirements.txt
+      - name: Validation des fichiers Markdown
+        run: python scripts/validate.py
+      - name: Intégrité face au document V2
+        run: python scripts/check_integrity.py
+      - name: Tests
+        run: python -m unittest discover -s tests -v
+      - name: Génération du classeur et du site
+        run: |
+          python scripts/build_excel.py
+          python scripts/build_site.py
+      - name: Livrables de la pull request
+        uses: actions/upload-artifact@v4
+        with:
+          name: livrables
+          path: |
+            dist/excel/
+            docs/audit/rapport-integrite.md
+          retention-days: 14

@@ -1,0 +1,47 @@
+# Clausier Numérique Responsable — site statique sur l'hébergement mutualisé OVH (cluster127).
+# Copié dans dist/site/.htaccess par scripts/build_site.py.
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+Options -Indexes
+
+# Forcer HTTPS. À décommenter seulement quand le certificat du sous-domaine est actif :
+# `openssl s_client -servername <sous-domaine> -connect <sous-domaine>:443` ne doit plus
+# renvoyer CN=cluster127.hosting.ovh.net (institutnr.org envoie HSTS includeSubDomains).
+# RewriteEngine On
+# RewriteCond %{HTTPS} !=on
+# RewriteCond %{HTTP:X-Forwarded-Proto} !https
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Types de fichiers
+AddType application/json .json
+AddType text/markdown .md
+AddType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet .xlsx
+
+# En-têtes de sécurité (aucun script ni style inline sur le site)
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; form-action 'none'; base-uri 'self'; frame-ancestors 'self'"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  <FilesMatch "\.(xlsx|pdf)$">
+    Header set Content-Disposition "attachment"
+  </FilesMatch>
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json text/plain
+</IfModule>
+
+# Cache : CSS et JS sont versionnés (?v=empreinte), donc cache long sans risque ;
+# pages et données en cache court pour refléter chaque publication.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType application/json "access plus 1 hour"
+  ExpiresByType application/pdf "access plus 1 day"
+</IfModule>

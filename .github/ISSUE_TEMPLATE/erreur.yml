@@ -1,0 +1,24 @@
+name: Erreur dans une clause
+description: Coquille, erreur factuelle, lien mort, référence périmée.
+labels: ["erreur"]
+body:
+  - type: input
+    id: clause
+    attributes:
+      label: Identifiant de la clause
+      description: Visible sur le site et dans le classeur, par exemple CLD-Q-01.
+      placeholder: CLD-Q-01
+    validations: {required: true}
+  - type: textarea
+    id: constat
+    attributes:
+      label: Texte actuel et erreur constatée
+    validations: {required: true}
+  - type: textarea
+    id: correction
+    attributes:
+      label: Correction proposée
+  - type: input
+    id: source
+    attributes:
+      label: Source justifiant la correction (adresse, texte réglementaire)

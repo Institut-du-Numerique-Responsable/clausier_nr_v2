@@ -1,0 +1,110 @@
+# Segments, sous-segments, sections et phases du clausier.
+#
+# titre_source : intitulé exact du document V2 (ODT/PDF).
+# libelle      : libellé court d'affichage. Les libellés courts des segments et les
+#                sous-segments du segment Matériels reprennent le classeur de
+#                préparation de Paul Saulnier (colonnes « Segment » et « Sous segment »).
+# prefixe      : préfixe des identifiants de clauses (voir docs/modele-documentaire.md).
+
+phases:
+  questionnaire:
+    libelle: "Questionnaire (RFI/RFP)"
+    libelle_excel: "RFI/RFP"
+    description: >-
+      Questionnaire type d'évaluation des soumissionnaires, en phase amont du marché.
+  exigences:
+    libelle: "Exigences (CCAP & CCTP)"
+    libelle_excel: "CCAP & CCTP"
+    description: >-
+      Exigences à intégrer au cahier des charges, suivies pendant la phase d'exécution du marché.
+
+segments:
+  - slug: commun
+    numero: "1"
+    titre_source: "1. EXIGENCES NUMÉRIQUE RESPONSABLE COMMUNES AUX SEGMENTS DES MARCHÉS IT"
+    libelle: "Exigences communes"
+    libelle_excel: "- Transverse -"
+    sections:
+      - {numero: "1.1", phase: questionnaire, prefixe: COM-Q,
+         titre_source: "1.1 Questionnaire type d'évaluation des soumissionnaires (RFI/RFP)"}
+      - {numero: "1.2", phase: exigences, prefixe: COM-E,
+         titre_source: "1.2 Exigences à intégrer au cahier des charges – phase d'exécution (CCAP & CCTP)"}
+    sous_segments: []
+
+  - slug: materiels
+    numero: "2"
+    titre_source: "2. ACHAT DE MATERIELS BUREAUTIQUES ET D’ÉQUIPEMENTS EN DATACENTER"
+    libelle: "Matériels"
+    libelle_excel: "Matériels"
+    sections:
+      - {numero: "2.1", phase: questionnaire, prefixe: MAT-Q,
+         titre_source: "2.1 Questionnaire type d'évaluation des soumissionnaires"}
+      - {numero: "2.2", phase: exigences, prefixe: MAT-E,
+         titre_source: "2.2 Exigences intégrées au cahier des charges suivies pendant la phase d'exécution du marché"}
+    sous_segments:
+      # sous-segments introduits par le classeur de préparation (absents de l'ODT)
+      - {slug: bureautique, libelle: "Bureautiques", origine: excel-preparation}
+      - {slug: datacenter, libelle: "Data centers", origine: excel-preparation}
+      - {slug: materiels-transverse, libelle: "- Transverse -", origine: excel-preparation}
+
+  - slug: cloud
+    numero: "3"
+    titre_source: "3. ACHAT DE SERVICES CLOUD"
+    libelle: "Services cloud"
+    libelle_excel: "Services cloud"
+    sections:
+      - {numero: "3.2", phase: questionnaire, prefixe: CLD-Q,
+         titre_source: "3.2 Questionnaire type d’évaluation des soumissionnaires"}
+      - {numero: "3.3", phase: exigences, prefixe: CLD-E,
+         titre_source: "3.3 Exigences intégrées au cahier des charges suivies pendant la phase d'exécution du marché"}
+    sous_segments: []
+
+  - slug: logiciels
+    numero: "4"
+    titre_source: "4. ACHATS DE LOGICIELS"
+    libelle: "Logiciels"
+    libelle_excel: "Logiciels"
+    sections:
+      - {numero: "4.1", phase: questionnaire, prefixe: LOG-Q,
+         titre_source: "4.1 Questionnaire type d'évaluation des soumissionnaires"}
+      - {numero: "4.2", phase: exigences, prefixe: LOG-E,
+         titre_source: "4.2 Exigences intégrées au cahier des charges suivies pendant la phase d'exécution du marché"}
+    sous_segments: []
+
+  - slug: prestations
+    numero: "5"
+    titre_source: "5. ACHAT DE PRESTATIONS"
+    libelle: "Prestations"
+    libelle_excel: "Prestations"
+    sections:
+      - {numero: "5.1.1", phase: questionnaire, prefixe: DEV-Q,
+         titre_source: "5.1.1 Questionnaire type d’évaluation des soumissionnaires"}
+      - {numero: "5.1.2", phase: exigences, prefixe: DEV-E,
+         titre_source: "5.1.2 Exigences du cahier des charges pour la phase d’exécution du marché"}
+      - {numero: "5.2.1", phase: questionnaire, prefixe: INF-Q,
+         titre_source: "5.2.1 Questionnaire type d'évaluation des soumissionnaires"}
+    sous_segments:
+      - {slug: developpement-integration-tma, libelle: "Développement / Intégration / TMA logiciels",
+         origine: odt, section: "5.1"}
+      - {slug: infogerance-bureautique, libelle: "Infogérance bureautique", origine: odt, section: "5.2"}
+
+  - slug: ia
+    numero: "6"
+    titre_source: "6. ACHATS IA/IAG"
+    libelle: "IA"
+    libelle_excel: "IA"
+    sections:
+      - {numero: "6.3", phase: questionnaire, prefixe: IA-Q,
+         titre_source: "6.3 IA et IAg prêt à l’emploi (chabot, détection automatique, …)"}
+      - {numero: "6.4", phase: questionnaire, prefixe: IA-Q,
+         titre_source: "6.4 Accès à des modèles fondationnels"}
+      - {numero: "6.5", phase: questionnaire, prefixe: IA-Q,
+         titre_source: "6.5 Infrastructure de développement et de déploiement ou de stockage des données"}
+    sous_segments:
+      - {slug: ia-pret-a-l-emploi, libelle: "IA et IAg prêt à l’emploi (chabot, détection automatique, …)",
+         origine: odt, section: "6.3"}
+      - {slug: ia-modeles-fondationnels, libelle: "IA / Accès à des modèles fondationnels",
+         origine: odt, section: "6.4"}
+      - {slug: ia-infrastructure,
+         libelle: "IA / Infrastructure de développement et de déploiement ou de stockage des données",
+         origine: odt, section: "6.5"}

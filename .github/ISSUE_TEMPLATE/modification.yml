@@ -1,0 +1,31 @@
+name: Proposition de modification
+description: Modifier le fond d'une clause (seuil, niveau, formulation).
+labels: ["proposition"]
+body:
+  - type: input
+    id: clause
+    attributes:
+      label: Identifiant de la clause
+      placeholder: COM-E-02
+    validations: {required: true}
+  - type: dropdown
+    id: rubrique
+    attributes:
+      label: Rubrique concernée
+      options: [Titre, Commentaires, Exigence(s) ou description, Questions, Livrables, "Niveau 1 (Must have)", "Niveau 2 (Nice to have)"]
+    validations: {required: true}
+  - type: textarea
+    id: proposition
+    attributes:
+      label: Texte proposé
+    validations: {required: true}
+  - type: textarea
+    id: motif
+    attributes:
+      label: Motif et maturité du marché
+      description: Pourquoi ce changement ? Les fournisseurs peuvent-ils y répondre aujourd'hui ?
+    validations: {required: true}
+  - type: input
+    id: organisation
+    attributes:
+      label: Organisation (facultatif)

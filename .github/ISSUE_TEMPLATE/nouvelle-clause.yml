@@ -1,0 +1,31 @@
+name: Nouvelle clause
+description: Proposer un critère ou une exigence absent du clausier.
+labels: ["nouvelle clause"]
+body:
+  - type: dropdown
+    id: segment
+    attributes:
+      label: Segment
+      options: [Exigences communes, Matériels, Services cloud, Logiciels, Prestations, IA]
+    validations: {required: true}
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Partie
+      options: ["Questionnaire (RFI/RFP)", "Exigences (CCAP & CCTP)"]
+    validations: {required: true}
+  - type: input
+    id: titre
+    attributes:
+      label: Intitulé
+    validations: {required: true}
+  - type: textarea
+    id: contenu
+    attributes:
+      label: Contenu
+      description: Commentaires, questions ou exigence, livrables, niveau 1 (Must have), niveau 2 (Nice to have).
+    validations: {required: true}
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources et références

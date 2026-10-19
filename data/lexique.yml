@@ -1,0 +1,329 @@
+# Lexique du clausier, repris de l'ODT V2 (section LEXIQUE).
+introduction: Pour faciliter la compréhension du Clausier Numérique Responsable, voici un lexique structuré
+  regroupant les termes techniques et acronymes essentiels. Ce lexique permet d'assurer une base commune
+  de dialogue entre les services Achats, IT et RSE.
+termes:
+- terme: ACV (Analyse de Cycle de Vie)
+  definition: Étude évaluant les impacts environnementaux d'un produit ou service, de l'extraction des
+    matières premières à sa fin de vie.
+  categorie: Indicateurs de Performance Environnementale
+- terme: CUE (Carbon Usage Effectiveness)
+  definition: Indicateur mesurant l'intensité carbone de l'énergie consommée par un centre de données.
+  categorie: Indicateurs de Performance Environnementale
+- terme: GWP (Global Warming Potential)
+  definition: Potentiel de Réchauffement Global, exprimé en CO2e, mesurant l'impact des gaz à effet de
+    serre.
+  categorie: Indicateurs de Performance Environnementale
+- terme: PCF (Product Carbon Footprint)
+  definition: Empreinte carbone spécifique à un équipement matériel ou un service IT.
+  categorie: Indicateurs de Performance Environnementale
+- terme: PUE (Power Usage Effectiveness)
+  definition: Indicateur d'efficacité énergétique mesurant le ratio entre l'énergie totale consommée par
+    un datacenter et celle utilisée par les équipements informatiques.
+  categorie: Indicateurs de Performance Environnementale
+- terme: WUE (Water Usage Effectiveness)
+  definition: Ratio mesurant l'efficacité de la consommation d'eau pour le refroidissement des infrastructures.
+  categorie: Indicateurs de Performance Environnementale
+- terme: DEEE / D3E (Déchets d'Équipements Électriques et Électroniques)
+  definition: Déchets issus des équipements numériques en fin de vie, soumis à des obligations de collecte
+    et de recyclage.
+  categorie: Indicateurs de Performance Environnementale
+- terme: GES (Gaz à Effet de Serre)
+  definition: Gaz responsables du réchauffement climatique, dont les émissions sont exprimées en équivalent
+    CO2 (CO2e).
+  categorie: Indicateurs de Performance Environnementale
+- terme: Scope 1, 2 et 3
+  definition: 'Périmètres de comptabilisation des émissions de GES : émissions directes (1), liées à l''énergie
+    (2) et indirectes de la chaîne de valeur (3).'
+  categorie: Indicateurs de Performance Environnementale
+- terme: TCO (Total Cost of Ownership)
+  definition: Coût total de possession d'un équipement intégrant achat, exploitation, maintenance et fin
+    de vie.
+  categorie: Indicateurs de Performance Environnementale
+- terme: FLOPS (Floating Point Operations Per Second)
+  definition: Unité de mesure de la puissance de calcul d'un processeur ou d'un accélérateur, utilisée
+    pour dimensionner les infrastructures d'entraînement et d'inférence.
+  categorie: Indicateurs de Performance Environnementale
+- terme: TDP (Thermal Design Power)
+  definition: Puissance thermique maximale qu'un composant dissipe en charge, exprimée en watts. Sert
+    d'indicateur de la consommation électrique de pointe.
+  categorie: Indicateurs de Performance Environnementale
+- terme: DAS (Débit d'Absorption Spécifique)
+  definition: Quantité d'énergie radiofréquence absorbée par le corps, exprimée en W/kg et mesurée pour
+    la tête, le tronc et les membres.
+  categorie: Indicateurs de Performance Environnementale
+- terme: WCF (Water Footprint)
+  definition: Empreinte eau d'un service ou d'un équipement, en complément de l'empreinte carbone.
+  categorie: Indicateurs de Performance Environnementale
+- terme: EnR (énergies renouvelables)
+  definition: Sources d'énergie renouvelables, dont la part se mesure en location-based (mix réel local)
+    ou en market-based (contrats d'achat).
+  categorie: Indicateurs de Performance Environnementale
+- terme: GPAI (General Purpose AI)
+  definition: Modèles d'intelligence artificielle à usage général, également appelés modèles fondationnels.
+  categorie: Intelligence Artificielle (IA)
+- terme: IA Agentique
+  definition: Système capable d'atteindre des objectifs complexes avec une supervision humaine limitée
+    en coordonnant plusieurs agents.
+  categorie: Intelligence Artificielle (IA)
+- terme: IA Générative (IAg)
+  definition: Forme d'IA produisant du contenu (texte, image, vidéo) en réponse à une requête utilisateur
+    appelée prompt.
+  categorie: Intelligence Artificielle (IA)
+- terme: Inférence
+  definition: Phase opérationnelle où le modèle d'IA répond à une requête utilisateur, par opposition
+    à la phase d'entraînement.
+  categorie: Intelligence Artificielle (IA)
+- terme: LLM (Large Language Model)
+  definition: Grands modèles de langage entraînés sur d'énormes volumes de données pour comprendre et
+    générer du texte.
+  categorie: Intelligence Artificielle (IA)
+- terme: MLOps
+  definition: Ensemble de pratiques visant à automatiser et fiabiliser le cycle de vie des modèles de
+    Machine Learning.
+  categorie: Intelligence Artificielle (IA)
+- terme: SIA (Système d'Intelligence Artificielle)
+  definition: Terme employé par l'IA Act pour désigner un système fondé sur l'intelligence artificielle.
+  categorie: Intelligence Artificielle (IA)
+- terme: XAI (eXplainable AI)
+  definition: Intelligence artificielle explicable, permettant de comprendre les facteurs ayant conduit
+    à une décision algorithmique.
+  categorie: Intelligence Artificielle (IA)
+- terme: FRIA (Fundamental Rights Impact Assessment)
+  definition: Analyse d'impact sur les droits fondamentaux, exigée par l'IA Act pour les systèmes à haut
+    risque.
+  categorie: Intelligence Artificielle (IA)
+- terme: GPU / TPU
+  definition: Processeur graphique et processeur dédié à l'apprentissage automatique. Ils portent l'essentiel
+    de la consommation des charges d'IA.
+  categorie: Intelligence Artificielle (IA)
+- terme: IaaS (Infrastructure as a Service)
+  definition: Fourniture de ressources matérielles brutes (serveurs, stockage, réseau) via le Cloud.
+  categorie: Modèles de Services Cloud
+- terme: PaaS (Platform as a Service)
+  definition: Mise à disposition de plateformes incluant des outils de développement et d'orchestration
+    pour les applications.
+  categorie: Modèles de Services Cloud
+- terme: SaaS (Software as a Service)
+  definition: Logiciels finis accessibles à la demande via un navigateur ou une API, sans gestion d'infrastructure
+    par l'utilisateur.
+  categorie: Modèles de Services Cloud
+- terme: AI Act
+  definition: Réglementation européenne encadrant le développement et l'usage de l'intelligence artificielle.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: REACH / RoHS
+  definition: Directives européennes limitant l'utilisation de substances dangereuses dans les équipements
+    électriques et électroniques.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: RGAA / WCAG
+  definition: Référentiels d'accessibilité numérique (français et international) garantissant l'usage
+    des services numériques par les personnes en situation de handicap.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: RGESN (Référentiel Général d'Écoconception de Services Numériques)
+  definition: cadre de référence pour réduire l'empreinte environnementale des logiciels.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: CSRD (Corporate Sustainability Reporting Directive)
+  definition: Directive européenne imposant aux entreprises un reporting de durabilité étendu et normalisé.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: RSE (Responsabilité Sociétale des Entreprises)
+  definition: Intégration volontaire des enjeux environnementaux et sociaux dans les activités d'une organisation.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: SBTi (Science Based Targets initiative)
+  definition: Initiative encadrant la définition d'objectifs de réduction des émissions alignés sur la
+    science climatique.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: ADEME (Agence de la transition écologique)
+  definition: Agence publique française de référence sur les méthodes et données environnementales.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: Loi AGEC
+  definition: Loi anti-gaspillage pour une économie circulaire, encadrant notamment le réemploi et la
+    réduction des déchets.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: Loi REEN
+  definition: Loi visant à réduire l'empreinte environnementale du numérique en France.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: CS3D (Corporate Sustainability Due Diligence Directive)
+  definition: Directive européenne sur le devoir de vigilance, adoptée en 2024.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: EAA (European Accessibility Act)
+  definition: Directive européenne d'accessibilité applicable depuis juin 2025.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: RGPD
+  definition: Règlement général sur la protection des données à caractère personnel.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: SVHC (Substances of Very High Concern)
+  definition: Substances extrêmement préoccupantes au sens du règlement REACH.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: PMR (Personnes à Mobilité Réduite)
+  definition: Normes d'accessibilité physique, applicables notamment aux interfaces matérielles.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: ANSSI
+  definition: Agence nationale de la sécurité des systèmes d'information.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: ANCT
+  definition: Agence nationale de la cohésion des territoires.
+  categorie: Réglementation, Santé et Accessibilité
+- terme: EA (Entreprises Adaptées) / ESAT (Établissements et Services d'Aide par le Travail)
+  definition: organisations employant majoritairement des personnes en situation de handicap.
+  categorie: Économie Circulaire et Sociale
+- terme: ESS (Économie Sociale et Solidaire)
+  definition: structures économiques ou organisations conciliant utilité sociale et performance économique.
+  categorie: Économie Circulaire et Sociale
+- terme: Réemploi
+  definition: Réutilisation d'un équipement pour un usage identique sans modification, prolongeant sa
+    durée de vie.
+  categorie: Économie Circulaire et Sociale
+- terme: Reconditionnement
+  definition: Remise en état d'un équipement d'occasion pour une seconde vie commercialisée avec garantie.
+  categorie: Économie Circulaire et Sociale
+- terme: Obsolescence programmée
+  definition: Réduction délibérée de la durée de vie d'un produit pour en accélérer le remplacement.
+  categorie: Économie Circulaire et Sociale
+- terme: IAE / SIAE (Insertion par l'Activité Économique)
+  definition: Structures conventionnées employant des personnes éloignées de l'emploi.
+  categorie: Économie Circulaire et Sociale
+- terme: STPA (Secteur du Travail Protégé et Adapté)
+  definition: Entreprises adaptées et ESAT accueillant des travailleurs en situation de handicap.
+  categorie: Économie Circulaire et Sociale
+- terme: DPP (Digital Product Passport)
+  definition: Passeport numérique de produit imposé par la réglementation européenne, détaillant composition
+    et réparabilité.
+  categorie: Économie Circulaire et Sociale
+- terme: NR (Numérique Responsable)
+  definition: Démarche visant à réduire les impacts environnementaux, sociaux et économiques du numérique
+    sur tout son cycle de vie.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: Sobriété numérique
+  definition: Approche consistant à limiter les usages et équipements numériques au strict nécessaire
+    afin d'en réduire l'empreinte.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: Écoconception
+  definition: Conception de produits ou services numériques intégrant la réduction des impacts environnementaux
+    dès leur création.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: Green IT / IT for Green
+  definition: Green IT réduit l'empreinte du numérique lui-même ; IT for Green mobilise le numérique pour
+    réduire l'empreinte d'autres activités.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: Infobésité
+  definition: Surcharge informationnelle liée à la production et au stockage excessifs de données numériques.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: Souveraineté numérique
+  definition: Capacité d'une organisation ou d'un État à maîtriser ses données, infrastructures et technologies
+    numériques.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: GR491
+  definition: Guide de référence de conception responsable de services numériques publié par l'Institut
+    du Numérique Responsable.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: SCI (Software Carbon Intensity)
+  definition: Méthode de calcul de l'intensité carbone d'un logiciel, normalisée par l'ISO/IEC 21031:2024.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: GHG Protocol (Greenhouse Gas Protocol)
+  definition: Référentiel international de comptabilisation des émissions de gaz à effet de serre, à l'origine
+    des scopes 1, 2 et 3.
+  categorie: Concepts et Démarches du Numérique Responsable
+- terme: RFI / RFP (Request For Information / Proposal)
+  definition: Demandes d'information puis de propositions adressées aux fournisseurs lors d'une consultation.
+  categorie: Acronymes Achats et Organisations
+- terme: CCTP (Cahier des Clauses Techniques Particulières)
+  definition: Document contractuel définissant les exigences techniques d'un marché.
+  categorie: Acronymes Achats et Organisations
+- terme: CCAP (Cahier des Clauses Administratives Particulières)
+  definition: Document contractuel fixant les clauses administratives propres à un marché.
+  categorie: Acronymes Achats et Organisations
+- terme: CCAG (Cahier des Clauses Administratives Générales)
+  definition: Clauses administratives types applicables à une catégorie de marchés.
+  categorie: Acronymes Achats et Organisations
+- terme: MCO (Maintien en Conditions Opérationnelles)
+  definition: Ensemble des actions garantissant la disponibilité et le bon fonctionnement d'un système
+    sur sa durée de vie.
+  categorie: Acronymes Achats et Organisations
+- terme: ESN (Entreprise de Services du Numérique)
+  definition: Société prestataire de services informatiques, anciennement appelée SSII.
+  categorie: Acronymes Achats et Organisations
+- terme: INR (Institut du Numérique Responsable)
+  definition: Organisation de référence promouvant les pratiques du numérique responsable.
+  categorie: Acronymes Achats et Organisations
+- terme: FTCC (French Tech Corporate Community)
+  definition: Communauté de grands groupes engagés au sein de la French Tech.
+  categorie: Acronymes Achats et Organisations
+- terme: CIGREF
+  definition: Association des grandes entreprises et administrations françaises dédiée au numérique.
+  categorie: Acronymes Achats et Organisations
+- terme: EcoVadis
+  definition: Plateforme d'évaluation de la performance RSE des fournisseurs.
+  categorie: Acronymes Achats et Organisations
+- terme: TMA (Tierce Maintenance Applicative)
+  definition: Externalisation de la maintenance corrective et évolutive d'une application.
+  categorie: Acronymes Achats et Organisations
+- terme: EEE (Espace Économique Européen)
+  definition: Union européenne élargie à l'Islande, au Liechtenstein et à la Norvège.
+  categorie: Acronymes Achats et Organisations
+- terme: MEP (Mise En Production)
+  definition: Déploiement d'une version applicative dans l'environnement d'exploitation.
+  categorie: Acronymes Achats et Organisations
+- terme: PCA / PRA (Plan de Continuité d'Activité / Plan de Reprise d'Activité)
+  definition: Dispositifs garantissant la poursuite ou le rétablissement du service après un incident
+    majeur.
+  categorie: Acronymes Achats et Organisations
+- terme: AFNOR
+  definition: Association française de normalisation, qui publie les normes NF et délivre les labels Engagé
+    RSE et Diversité.
+  categorie: Acronymes Achats et Organisations
+- terme: IEA (International Energy Agency)
+  definition: Agence internationale de l'énergie.
+  categorie: Acronymes Achats et Organisations
+- terme: EPEAT (Electronic Product Environmental Assessment Tool)
+  definition: Écolabel nord-américain classant les équipements électroniques en Bronze, Silver et Gold
+    selon leurs performances environnementales.
+  categorie: Labels, Certifications et Référentiels
+- terme: TCO Certified
+  definition: Certification suédoise de durabilité des produits informatiques, à ne pas confondre avec
+    le TCO financier. Elle couvre l'environnement, la santé et les conditions sociales de production.
+  categorie: Labels, Certifications et Référentiels
+- terme: Energy Star
+  definition: Programme de certification de l'efficacité énergétique des équipements électroniques.
+  categorie: Labels, Certifications et Référentiels
+- terme: Blue Angel
+  definition: Écolabel allemand couvrant notamment les imprimantes et les imprimantes multifonctions.
+  categorie: Labels, Certifications et Référentiels
+- terme: ASHRAE
+  definition: Association américaine des ingénieurs du chauffage et de la climatisation. Ses classes A1
+    à A4 définissent les plages de température et d'humidité admissibles en datacenter.
+  categorie: Labels, Certifications et Référentiels
+- terme: GEEIS (Gender Equality European & International Standard)
+  definition: Label européen d'égalité professionnelle. Sa déclinaison GEEIS-AI porte sur la non-discrimination
+    des systèmes d'IA.
+  categorie: Labels, Certifications et Référentiels
+- terme: RBA (Responsible Business Alliance)
+  definition: Coalition industrielle auditant les conditions sociales et environnementales des sites de
+    production électronique.
+  categorie: Labels, Certifications et Référentiels
+- terme: IAAP (International Association of Accessibility Professionals)
+  definition: Association délivrant des certifications individuelles en accessibilité numérique.
+  categorie: Labels, Certifications et Référentiels
+- terme: ISO / IEC
+  definition: Organisation internationale de normalisation et Commission électrotechnique internationale,
+    qui publient les normes ISO et ISO/IEC citées dans ce clausier.
+  categorie: Labels, Certifications et Référentiels
+- terme: CPU (Central Processing Unit)
+  definition: Processeur généraliste d'un équipement informatique.
+  categorie: Termes Techniques
+- terme: RAM (Random Access Memory)
+  definition: Mémoire vive d'un équipement.
+  categorie: Termes Techniques
+- terme: PSU (Power Supply Unit)
+  definition: Bloc d'alimentation d'un serveur ou d'un poste de travail, dont le rendement est certifié
+    par le programme 80 PLUS.
+  categorie: Termes Techniques
+- terme: OS (Operating System)
+  definition: Système d'exploitation.
+  categorie: Termes Techniques
+- terme: IoT (Internet of Things)
+  definition: Internet des objets, désignant les équipements connectés qui collectent ou échangent des
+    données.
+  categorie: Termes Techniques
+- terme: Lecteurs d'écran (NVDA, JAWS, VoiceOver)
+  definition: Logiciels de restitution vocale utilisés par les personnes déficientes visuelles.
+  categorie: Termes Techniques
