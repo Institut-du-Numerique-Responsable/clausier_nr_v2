@@ -185,6 +185,7 @@
       });
     }
     function telecharger(nom, type, contenu) {
+      if (window._paq) { window._paq.push(["trackEvent", "Sélection", "Export", nom.split(".").pop()]); }
       var url = URL.createObjectURL(new Blob([contenu], { type: type }));
       var a = el("a");
       a.href = url; a.download = nom;

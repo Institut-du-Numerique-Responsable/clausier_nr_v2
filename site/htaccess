@@ -13,7 +13,9 @@ Options -Indexes
 # RewriteCond %{HTTP:X-Forwarded-Proto} !https
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-# Types de fichiers
+# Types de fichiers et encodage
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .txt .json .xml .css .js .md
 AddType application/json .json
 AddType text/markdown .md
 AddType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet .xlsx
@@ -23,7 +25,8 @@ AddType application/vnd.openxmlformats-officedocument.spreadsheetml.sheet .xlsx
   Header set X-Content-Type-Options "nosniff"
   Header set X-Frame-Options "SAMEORIGIN"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
-  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; form-action 'none'; base-uri 'self'; frame-ancestors 'self'"
+  # analytic.institutnr.org:8443 : Matomo de l'INR (mesure d'audience sans cookie)
+  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data: https://analytic.institutnr.org:8443; style-src 'self'; script-src 'self' https://analytic.institutnr.org:8443; connect-src 'self' https://analytic.institutnr.org:8443; form-action 'none'; base-uri 'self'; frame-ancestors 'self'"
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
   <FilesMatch "\.(xlsx|pdf)$">
     Header set Content-Disposition "attachment"

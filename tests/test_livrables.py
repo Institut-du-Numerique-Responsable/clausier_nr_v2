@@ -185,7 +185,8 @@ class TestSite(unittest.TestCase):
                 u = urlparse(ref)
                 if u.scheme or ref.startswith(("#", "mailto:")):
                     continue
-                cible = (p.parent / unquote(u.path)).resolve()
+                base = self.site if u.path.startswith("/") else p.parent
+                cible = (base / unquote(u.path).lstrip("/")).resolve()
                 if cible.is_dir():
                     cible = cible / "index.html"
                 if not cible.exists():
@@ -232,6 +233,24 @@ class TestSite(unittest.TestCase):
         if clausier.load_yaml("metadata.yml")["liens"]["site"]:
             self.assertIn('rel="canonical"', page)
             self.assertTrue((self.site / "sitemap.xml").exists())
+
+    def test_mesure_audience_conditionnelle(self):
+        site = build_site.Site(TMP / "site-m")
+        site.meta["matomo"] = {"url": "https://analytic.institutnr.org:8443/", "site_id": 99}
+        balise = site.balise_mesure("../")
+        self.assertIn('data-site="99"', balise)
+        self.assertIn("assets/mesure.js", balise)
+        site.meta["matomo"]["site_id"] = None
+        self.assertEqual(site.balise_mesure("../"), "")
+        htaccess = (ROOT / "site/htaccess").read_text(encoding="utf-8")
+        self.assertIn("script-src 'self' https://analytic.institutnr.org:8443", htaccess)
+
+    def test_pages_legales(self):
+        pied = (self.site / "index.html").read_text(encoding="utf-8")
+        for page in ("mentions-legales", "accessibilite", "cookies"):
+            self.assertTrue((self.site / page / "index.html").exists(), page)
+            self.assertIn(f'href="{page}/"', pied)
+        self.assertNotIn("à compléter", (self.site / "mentions-legales/index.html").read_text(encoding="utf-8"))
 
     def test_budgets_de_poids(self):
         for p in self.site.rglob("*"):
