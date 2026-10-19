@@ -8,7 +8,40 @@ Le clausier est coordonné par la French Tech Corporate Community (FTCC) et l'In
 Numérique Responsable (INR). Sa version 2.0 (août 2026) compte 102 clauses réparties en six
 segments d'achat.
 
-Ce dépôt en fait un référentiel ouvert et maintenable : **le texte des clauses est tenu en
+## Accéder au clausier
+
+| | Lien |
+|---|---|
+| Page officielle | https://institutnr.org/clausier-numerique-ecoresponsable |
+| Document PDF (V2, 44 pages) | [clausier-numerique-responsable-v2.pdf](https://institutnr.org/wp-content/uploads/2026/09/clausier-numerique-responsable-v2.pdf) |
+| Classeur Excel (catalogue, sélection, clauses retenues) | [Clausier-Numerique-Responsable-V2.xlsx](https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2/releases/latest/download/Clausier-Numerique-Responsable-V2.xlsx) (disponible à la première version publiée) |
+| Site de consultation (recherche, sélection, exports) | en cours de mise en ligne sur l'hébergement de l'INR |
+| Clauses au format texte | dossier [`content/clauses/`](content/clauses/) |
+
+## Le principe d'un clausier
+
+Un clausier n'est pas un cahier des charges à reprendre en bloc. C'est une **bibliothèque de
+clauses prérédigées** dans laquelle chaque organisation **prend ce qu'elle estime nécessaire**
+et l'intègre à son propre processus d'achat :
+
+- dans une **consultation** ou un **sourcing**, pour interroger le marché ;
+- dans un **RFI ou un RFP**, avec les questionnaires d'évaluation des soumissionnaires ;
+- dans le **cahier des charges** (CCAP, CCTP) ou le **contrat**, avec les exigences suivies
+  pendant l'exécution ;
+- dans un avenant, une convention de service ou une politique d'achat interne.
+
+Les clauses sont **prêtes à l'emploi mais restent ajustables**. Chaque entreprise, collectivité
+ou administration les adapte à son contexte : périmètre de l'achat, maturité du marché,
+contraintes de la commande publique, stratégie RSE, poids accordé à chaque critère. Les deux
+niveaux de chaque clause aident à calibrer l'ambition : le *Must have* comme socle, le
+*Nice to have* pour valoriser les offres les plus avancées.
+
+La licence CC BY 4.0 le permet expressément : reprenez, modifiez et intégrez les clauses,
+y compris dans un cadre commercial, en citant la source.
+
+## Le dépôt
+
+Ce dépôt fait du clausier un référentiel ouvert et maintenable : **le texte des clauses est tenu en
 Markdown, un fichier par clause**. Le classeur Excel et le site sont générés à partir de ces
 fichiers ; on ne les modifie jamais à la main.
 
