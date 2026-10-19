@@ -13,9 +13,9 @@ segments d'achat.
 | | Lien |
 |---|---|
 | Page officielle | https://institutnr.org/clausier-numerique-ecoresponsable |
-| Document PDF (V2, 44 pages) | [clausier-numerique-responsable-v2.pdf](https://institutnr.org/wp-content/uploads/2026/09/clausier-numerique-responsable-v2.pdf) |
+| Document PDF (V2, 44 pages, fait foi) | [clausier-numerique-responsable-v2.pdf](https://institutnr.org/wp-content/uploads/2026/09/clausier-numerique-responsable-v2.pdf) |
 | Classeur Excel (catalogue, sélection, clauses retenues) | [Clausier-Numerique-Responsable-V2.xlsx](https://github.com/Institut-du-Numerique-Responsable/clausier_nr_v2/releases/latest/download/Clausier-Numerique-Responsable-V2.xlsx) (disponible à la première version publiée) |
-| Site de consultation (recherche, sélection, exports) | en cours de mise en ligne sur l'hébergement de l'INR |
+| Site de consultation (recherche, sélection, exports) | https://clausier.institutnr.org/ (mise en ligne en cours) |
 | Clauses au format texte | dossier [`content/clauses/`](content/clauses/) |
 
 ## Le principe d'un clausier

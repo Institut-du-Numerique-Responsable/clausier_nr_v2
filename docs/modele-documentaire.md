@@ -76,4 +76,5 @@ partagent `IA-Q`, numérotés à la suite (6.3, puis 6.4, puis 6.5), comme dans 
 Pour chaque clause : document, section, tableau, ligne, page du PDF (`source`), ligne du
 classeur de préparation et écarts (`excel_preparation`), modifications (`modifications`),
 historique Git. `scripts/check_integrity.py` vérifie à chaque exécution que tout le V2 est
-repris : rapport dans `docs/audit/rapport-integrite.md`.
+repris, rubrique par rubrique face à l'ODT et segment par segment face au PDF, qui fait foi :
+rapport dans `docs/audit/rapport-integrite.md`.

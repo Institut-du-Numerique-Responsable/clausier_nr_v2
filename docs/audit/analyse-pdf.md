@@ -1,7 +1,10 @@
 # Analyse du document V2 (PDF et ODT)
 
-L'analyse porte sur l'ODT maître, plus fiable que le PDF pour la structure (tableaux,
-cellules fusionnées, mise en forme). Le PDF sert à la pagination et au contrôle du rendu.
+**Le PDF V2 fait foi.** Pour en extraire la structure (tableaux, cellules fusionnées, gras,
+listes), on lit l'ODT dont il est le rendu direct (même date de génération, 11 août 2026) :
+l'extraction depuis un PDF en colonnes mélange les cellules. Le texte obtenu est ensuite
+recherché dans le PDF, segment par segment (`scripts/check_integrity.py`) : aucune différence
+de texte constatée.
 
 ## Plan du document (44 pages)
 

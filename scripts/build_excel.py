@@ -52,6 +52,8 @@ THIN = Border(bottom=Side(style="thin", color="D8E3E6"))
 CATALOGUE = "Catalogue"
 SELECTION = "Sélection"
 RETENUES = "Clauses retenues"
+DONNEES = "Données"
+MARQUE = "¶"   # remplace les sauts de ligne dans la feuille Données (voir sheet_donnees)
 CHAMPS = ["commentaire", "exigences", "livrables", "questions", "niveau_1", "niveau_2"]
 
 
@@ -227,6 +229,23 @@ RET_COLS = [("N°", None, 5), ("ID", "id", 11), ("Critère", "critere", 30),
             ("Segment", "segment", 15), ("Phase", "phase", 13)]
 
 
+def sheet_donnees(wb, rows):
+    """Copie masquée du catalogue, sauts de ligne remplacés par MARQUE.
+
+    LibreOffice perd les sauts de ligne d'un texte renvoyé par INDEX. La feuille Clauses
+    retenues lit donc cette copie et rétablit les sauts avec SUBSTITUTE(…;MARQUE;CHAR(10)),
+    ce qui fonctionne sous Excel comme sous LibreOffice.
+    """
+    ws = wb.create_sheet(DONNEES)
+    for j, (h, _, _) in enumerate(CAT_COLS, start=1):
+        ws.cell(1, j, h)
+    for i, row in enumerate(rows, start=2):
+        for j, (_, key, _) in enumerate(CAT_COLS, start=1):
+            v = row[key]
+            ws.cell(i, j, v.replace("\n", MARQUE) if isinstance(v, str) else v)
+    ws.sheet_state = "hidden"
+
+
 def sheet_retenues(wb, n):
     ws = wb.create_sheet(RETENUES)
     cat_col = {key: get_column_letter(j) for j, (_, key, _) in enumerate(CAT_COLS, start=1)}
@@ -237,7 +256,7 @@ def sheet_retenues(wb, n):
     for j, (h, _, _) in enumerate(RET_COLS, start=1):
         ws.cell(2, j, h)
     style_header(ws, 2, len(RET_COLS))
-    q_sel, q_cat = f"'{SELECTION}'", f"'{CATALOGUE}'"
+    q_sel, q_cat = f"'{SELECTION}'", f"'{DONNEES}'"
     for k in range(1, n + 1):
         i = k + 2
         ws.cell(i, 1, f'=IF(B{i}="","",{k})')
@@ -245,8 +264,8 @@ def sheet_retenues(wb, n):
                       f'MATCH({k},{q_sel}!$G$4:$G${sel_last},0)),"")')
         for j, (_, key, _) in enumerate(RET_COLS[2:], start=3):
             col = cat_col[key]
-            ws.cell(i, j, f'=IF($B{i}="","",INDEX({q_cat}!${col}$2:${col}${cat_last},'
-                          f'MATCH($B{i},{q_cat}!$A$2:$A${cat_last},0))&"")')
+            ws.cell(i, j, f'=IF($B{i}="","",SUBSTITUTE(INDEX({q_cat}!${col}$2:${col}${cat_last},'
+                          f'MATCH($B{i},{q_cat}!$A$2:$A${cat_last},0))&"","{MARQUE}",CHAR(10)))')
         for j in range(1, len(RET_COLS) + 1):
             ws.cell(i, j).font = F_BOLD if j in (2, 3) else F_BASE
             ws.cell(i, j).alignment = WRAP
@@ -344,6 +363,7 @@ def build(out=OUT, preselect=()):
     sheet_lexique(wb)
     sheet_references(wb)
     sheet_credits(wb, meta)
+    sheet_donnees(wb, rows)
     print_setup(wb)
     p = wb.properties
     p.title = f"{meta['titre']} V{meta['version']}"

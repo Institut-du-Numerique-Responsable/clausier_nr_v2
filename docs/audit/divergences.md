@@ -20,6 +20,14 @@ formulation d'une clause ; **Mineur** = coquille ou mise en forme.
   dans une version 2.0.1 du PDF. Les documents d'origine de `sources/originaux/` gardent
   leur mention historique.
 
+### D-02 — Document de référence — **tranché**
+
+Le README d'origine du répertoire de travail désignait l'ODT comme source de vérité.
+**Décision de l'INR (19 octobre 2026) : le PDF V2 fait foi** pour la version 2.0. Le
+Markdown, contrôlé contre ce PDF segment par segment, devient la source éditoriale des
+versions suivantes. L'ODT, dont le PDF est le rendu, reste un outil d'extraction et une
+archive : il ne faut plus le modifier.
+
 ## Écarts entre le V2 et le classeur de préparation
 
 ### D-03 — Écarts de contenu du classeur (Éditorial)
