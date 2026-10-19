@@ -95,6 +95,13 @@ class Site:
             out.append(f'<script type="application/ld+json">{data}</script>')
         return "\n".join(out)
 
+    def balise_mesure(self, r):
+        m = self.meta.get("matomo") or {}
+        if not m.get("site_id"):
+            return ""
+        return (f'<script src="{r}assets/mesure.js?v={self.version_assets}" '
+                f'data-matomo="{esc(m["url"])}" data-site="{m["site_id"]}" defer></script>')
+
     def org(self):
         return [{"@type": "Organization", "name": "Institut du Numérique Responsable (INR)",
                  "url": "https://institutnr.org/"},
@@ -102,7 +109,8 @@ class Site:
 
     def write(self, rel, body, titre, desc="", actif="", jsonld=None):
         depth = rel.count("/")
-        r = "../" * depth
+        # la page 404 est servie à n'importe quelle profondeur : chemins absolus
+        r = "/" if rel == "404.html" else "../" * depth
         desc = desc or DESC
         nav = [("", "Accueil"), ("clausier/", "Clausier"), ("mode-emploi/", "Mode d'emploi"),
                ("a-propos/", "À propos"), ("contribuer/", "Contribuer")]
@@ -129,6 +137,7 @@ class Site:
 <link rel="stylesheet" href="{r}assets/style.css?v={self.version_assets}">
 <script src="{r}assets/js.js?v={self.version_assets}"></script>
 <script src="{r}assets/clausier.js?v={self.version_assets}" defer></script>
+{self.balise_mesure(r)}
 </head>
 <body>
 <a class="evitement" href="#contenu">Aller au contenu</a>
@@ -149,8 +158,10 @@ réutilisation et modification libres, en citant la source. <a href="{r}credits/
 <p><a href="{r}sources/">Sources documentaires</a></p><p><a href="{r}methodologie/">Méthodologie</a></p>
 <p><a href="{r}versions/">Historique des versions</a></p></div>
 <div><p><a href="{r}credits/">Crédits</a></p><p><a href="{r}mentions-legales/">Mentions légales</a></p>
+<p><a href="{r}accessibilite/">Accessibilité : non conforme</a></p>
+<p><a href="{r}cookies/">Cookies et données personnelles</a></p>
 <p><a href="https://institutnr.org/">institutnr.org</a></p>{lien_depot}
-<p>Site sans cookie ni mesure d'audience.</p></div>
+<p>Site sans cookie.</p></div>
 </div></footer>
 </body>
 </html>
@@ -390,7 +401,9 @@ puis cochez « Retenir » pour composer votre sélection.</p>
         for name, titre, actif in [("mode-emploi", "Mode d'emploi", "mode-emploi/"),
                                    ("methodologie", "Méthodologie", ""),
                                    ("contribuer", "Contribuer", "contribuer/"),
-                                   ("mentions-legales", "Mentions légales", "")]:
+                                   ("mentions-legales", "Mentions légales", ""),
+                                   ("accessibilite", "Déclaration d'accessibilité", ""),
+                                   ("cookies", "Cookies et données personnelles", "")]:
             self.page_md(f"{name}/", S / f"{name}.md", titre, actif=actif)
         src_note = '<p class="discret">Texte du Clausier Numérique Responsable V2.</p>'
         self.page_md("comment-lire/", P / "comment-lire.md", "Comment lire le clausier", src_note)

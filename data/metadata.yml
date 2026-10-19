@@ -44,3 +44,10 @@ liens:
   page_inr: "https://institutnr.org/clausier-numerique-ecoresponsable"
   site: "https://clausier.institutnr.org/"   # sous-domaine dédié (INR, 19/10/2026)
   hebergement: "OVH mutualisé, cluster127 (alias SSH ovh-cluster127), dossier dédié au sous-domaine"
+
+# Mesure d'audience : Matomo auto-hébergé de l'INR (serveur ovh-rise), sans cookie.
+# Le script n'est inséré que si site_id est renseigné.
+matomo:
+  url: "https://analytic.institutnr.org:8443/"
+  site_id: null   # à créer dans Matomo (Sites web > Gérer) pour clausier.institutnr.org
+
